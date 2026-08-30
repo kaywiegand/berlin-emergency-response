@@ -1,4 +1,4 @@
-# Vorstudie — Datenquellen und Themenwahl
+# Data Sources — Prüfung und Themenwahl
 
 > Stand 2026-08-29. Grundlage der Entscheidung für dieses Projekt.
 > Alle Angaben stammen aus direkten Abrufen der Endpunkte, nicht aus Dokumentation.

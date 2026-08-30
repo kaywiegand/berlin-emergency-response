@@ -1,7 +1,7 @@
 # ROADMAP — berlin-emergency-response
 
 > Ausgangslage → Phasen → Ziel
-> Inhaltliches Konzept: [docs/KONZEPT.md](docs/KONZEPT.md)
+> Inhaltliches Konzept: [docs/CONCEPT.md](docs/CONCEPT.md)
 
 ---
 
@@ -62,7 +62,7 @@ erhöht die Qualität, ist aber nicht Voraussetzung.
 Ein Datenprodukt, das täglich ohne Eingriff läuft und die Frage beantwortet, wo
 der Berliner Rettungsdienst seine gesetzliche Hilfsfrist hält und wo nicht.
 
-Erfolgskriterien im Detail: [docs/KONZEPT.md](docs/KONZEPT.md), Abschnitt 6.
+Erfolgskriterien im Detail: [docs/CONCEPT.md](docs/CONCEPT.md), Abschnitt 6.
 
 ---
 

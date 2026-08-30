@@ -1,7 +1,7 @@
-# Konzept — Berlin Emergency Response
+# Concept — Berlin Emergency Response
 
 > Was gebaut wird, warum, und woran der Erfolg gemessen wird.
-> Grundlage: [VORSTUDIE.md](VORSTUDIE.md). Phasenplan: [ROADMAP.md](../ROADMAP.md).
+> Grundlage: [DATA_SOURCES.md](DATA_SOURCES.md). Phasenplan: [ROADMAP.md](../ROADMAP.md).
 
 ---
 
