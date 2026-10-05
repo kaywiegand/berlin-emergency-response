@@ -53,3 +53,56 @@ Thumbs.db
 # ── Public (optional – kommentiere aus, wenn du Public-Artefakte tracken willst) ───
 # public/img/
 # public/md/
+
+
+
+
+# ==========================================
+# Environments & Dependency Management (uv/Python)
+# ==========================================
+.venv/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# ==========================================
+# Data Storage & Local Databases
+# ==========================================
+# Ignoriert lokale DuckDB-Dateien und Temporärdateien
+data/*.duckdb
+data/*.duckdb.wal
+data/*.csv
+data/*.parquet
+
+# ==========================================
+# dbt Build Artifacts & Credentials
+# ==========================================
+# dbt execution target folder & installed packages
+target/
+dbt_packages/
+dbt_modules/
+
+# Credentials / Profiles (muss lokal bleiben, nicht ins Repo!)
+profiles.yml
+
+# ==========================================
+# Operating System & IDE Artifacts
+# ==========================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# VS Code / JetBrains
+.vscode/
+.idea/
+dbt_internal_packages/
+
+
+logs/
+.user.yml
+.duckdb
+data/*.duck
