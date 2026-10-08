@@ -1,11 +1,20 @@
 # Makefile – berlin-emergency-response
 # Verwendung: make <target>   (Voraussetzung: uv)
 
-.PHONY: setup dbt-deps dbt-parse dbt-build app clean help
+.PHONY: setup ingest ingest-full test dbt-deps dbt-parse dbt-build app clean help
 
 setup: ## Umgebung + Dependencies installieren
 	uv sync
 	uv run dbt deps
+
+ingest: ## Tagesmodus: laufendes Jahr, Daily, Turnout-Snapshot
+	uv run python scripts/ingest.py
+
+ingest-full: ## Alle Jahre laden (rund 650 MB Download)
+	uv run python scripts/ingest.py --full
+
+test: ## Python-Tests
+	uv run pytest tests -q
 
 dbt-deps: ## dbt-Packages installieren
 	uv run dbt deps
