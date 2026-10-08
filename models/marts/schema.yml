@@ -1,32 +1,83 @@
 version: 2
 
 models:
-  - name: fct_missions_daily
-    description: "Finales Mart-Modell der täglichen Berliner Notfalleinsätze inklusive 7-Tage-Durchschnitt und Abweichungen."
-    
+  - name: dim_district
+    description: The 12 Berlin districts.
+    columns:
+      - name: district_code
+        data_tests: [unique, not_null]
+      - name: district_name
+        data_tests: [unique, not_null]
+
+  - name: dim_region
+    description: LOR regions (planning room, Bezirksregion, prediction area) with hierarchy derived from the ids.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [region_level, region_id]
+    columns:
+      - name: region_id
+        data_tests: [not_null]
+      - name: district_code
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_district')
+                field: district_code
+
+  - name: fct_timegoal_region_yearly
+    description: >
+      Official Hilfsfrist figures per LOR region and year (2024 onward). The population of
+      critical EMS missions shrinks sharply from 2024 to 2025 (see seed_events); compare years with care.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [region_level, region_id, data_year]
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: ems_critical_timegoal_reached <= ems_critical_timegoal_computed
+    columns:
+      - name: ems_critical_timegoal_quote
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                max_value: 1
+      - name: region_id
+        data_tests: [not_null]
+
+  - name: fct_missions_daily_district
+    description: Daily missions per district, mission group and criticality tier (incremental).
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [mission_date, district_code, mission_group, criticality_tier]
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: mission_count_within_timegoal <= mission_count_with_response_time
+    columns:
+      - name: district_code
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_district')
+                field: district_code
+      - name: mission_count
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 1
+
+  - name: fct_missions_daily_citywide
+    description: City-wide daily series from Daily_Data.
     columns:
       - name: mission_date
-        description: "Das Datum des Einsatztages"
-        tests:
-          - unique
-          - not_null
+        data_tests: [unique, not_null]
 
-      - name: total_missions
-        description: "Gesamtzahl aller Einsätze an diesem Tag"
-        tests:
-          - not_null
-
-      - name: rescue_missions
-        description: "Anzahl Rettungsdienst-Einsätze"
-        tests:
-          - not_null
-
-      - name: fire_missions
-        description: "Anzahl Brandbekämpfungs-Einsätze"
-        tests:
-          - not_null
-
-      - name: total_missions_7d_avg
-        description: "Rollierender 7-Tage-Mittelwert der Gesamteinsätze"
-        tests:
-          - not_null
+  - name: fct_turnout_times_quarterly
+    description: Crew turnout times per station and quarter.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [station_id, period]

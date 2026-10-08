@@ -1,0 +1,20 @@
+version: 2
+
+seeds:
+  - name: seed_districts
+    description: Berlin districts with the 2-digit code used as prefix in all LOR ids.
+    columns:
+      - name: district_code
+        data_tests: [unique, not_null]
+  - name: seed_dispatch_codes
+    description: Dispatch codes with names, derived from the distinct pairs in Mission_Data. About half have no name upstream.
+    columns:
+      - name: dispatchcode
+        data_tests: [unique, not_null]
+  - name: seed_events
+    description: Documented events and definition changes that explain breaks in the data. Only entries with a source.
+    columns:
+      - name: event_id
+        data_tests: [unique, not_null]
+      - name: source
+        data_tests: [not_null]

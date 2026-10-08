@@ -1,17 +1,89 @@
 version: 2
 
 models:
-  - name: stg_missions_daily
-    description: "Bereinigtes Staging-Modell der rohen Berliner Notfalleinsätze. Standardisiert Spaltennamen und Typen."
-    
+  - name: stg_missions
+    description: Typed missions, one row per mission (no upstream id, duplicates are natural).
     columns:
       - name: mission_date
-        description: "Das standardisierte Datum des Einsatztages"
-        tests:
-          - unique
+        data_tests: [not_null]
+      - name: mission_type
+        data_tests:
           - not_null
+          - accepted_values:
+              arguments:
+                values: [Rettungsdienst, Rettungsdienst mit Technischer Hilfeleistung, Brand, Technische Hilfeleistung, Notverlegung, Sonstige, Befristete Ausserdienstnahme, Pandemie]
+              config:
+                severity: warn
+      - name: dispatch_criticality
+        description: Dispatch code level A-E and O; null for missions without dispatch code.
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [A, B, C, D, E, O]
+              config:
+                severity: warn
+      - name: district_name
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('seed_districts')
+                field: district_name
+      - name: response_time_seconds
+        description: Seconds from mission creation to first arrival; null when not recorded.
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 1
+                max_value: 10000
+      - name: dispatchcode
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('seed_dispatch_codes')
+                field: dispatchcode
 
-      - name: total_missions
-        description: "Gesamteinsätze auf Staging-Ebene"
-        tests:
-          - not_null
+  - name: stg_daily_missions
+    description: City-wide daily series from Daily_Data.
+    columns:
+      - name: mission_date
+        data_tests: [unique, not_null]
+      - name: mission_count_all
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 1
+
+  - name: stg_regional_planning_room
+    data_tests: &regional_grain
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [region_id, data_year]
+    columns: &regional_columns
+      - name: region_id
+        data_tests: [not_null]
+      - name: data_year
+        data_tests: [not_null]
+
+  - name: stg_regional_district_area
+    data_tests: *regional_grain
+    columns: *regional_columns
+
+  - name: stg_regional_prediction_area
+    data_tests: *regional_grain
+    columns: *regional_columns
+
+  - name: stg_turnout_times
+    description: Turnout times per station; quarters plus the rolling 'current' snapshot. Future quarters are filtered out.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [station_id, period]
+    columns:
+      - name: station_id
+        data_tests: [not_null]
+      - name: period_type
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [quarter, rolling]

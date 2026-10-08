@@ -1,0 +1,3 @@
+event_id,event_start,event_end,scope,title,source,source_verified
+1,2024-12-31,2025-01-01,call_data,"Einschränkungen der Notrufnummer 112 in der Silvesternacht, Rückfallebene; Notrufzahlen unvollständig, Einsätze vollständig",Datasets/Daily_Data/DISCLAIMER.txt (BF-Open-Data),true
+2,2025-01-01,2025-12-31,timegoal_definition,"Hilfsfrist-Grundgesamtheit 'kritischer' Rettungsdiensteinsätze ab 2025 deutlich kleiner als 2024 (Regional_Data ems_critical 2024 -> 2025); Ursache nicht dokumentiert",Datasets/Regional_Data (eigene Beobachtung S2),false

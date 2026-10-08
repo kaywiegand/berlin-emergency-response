@@ -1,0 +1,34 @@
+version: 2
+
+models:
+  - name: int_missions_enriched
+    description: Missions joined to districts, with mission group, criticality tier and time-goal flag.
+    columns:
+      - name: district_code
+        data_tests: [not_null]
+      - name: mission_group
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [ems, fire, technical, other]
+      - name: is_within_timegoal
+        description: True if response_time_seconds <= var timegoal_seconds; null without response time.
+
+  - name: int_regional_timegoal
+    description: The three Regional_Data levels unioned, with district code and time-goal quotas.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [region_level, region_id, data_year]
+    columns:
+      - name: region_level
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [planning_room, district_area, prediction_area]
+      - name: district_code
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('seed_districts')
+                field: district_code
