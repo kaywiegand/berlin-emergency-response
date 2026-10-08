@@ -1,21 +1,20 @@
-# .gitignore – Python / Data Science (uv + venv)
-# ------------------------------------------------
-# WICHTIG: Daten und Modelle NICHT in Git einchecken!
-# uv.lock wird NICHT ignoriert – Lockfile gehört in Git!
+# .gitignore – dbt + DuckDB + Streamlit (uv)
+# uv.lock gehört in Git. dbt-Modelle, Seeds und profiles.yml (nur DuckDB-Pfad, keine Secrets) ebenfalls.
 
-# ── Daten ──────────────────────────────────────────────────────────────────
+# ── Daten (nur unter data/, damit seeds/*.csv versioniert werden) ──────────
 data/raw/
 data/interim/
 data/processed/
-*.csv
+data/*.csv
+data/*.parquet
+data/*.duckdb
+data/*.duckdb.wal
 *.xlsx
-*.parquet
 *.feather
 *.h5
 *.hdf5
 
-# ── Modelle & Artefakte ────────────────────────────────────────────────────
-models/
+# ── Artefakte ──────────────────────────────────────────────────────────────
 *.pkl
 *.joblib
 *.pt
@@ -24,6 +23,7 @@ models/
 # ── Python ─────────────────────────────────────────────────────────────────
 __pycache__/
 *.py[cod]
+*$py.class
 *.pyo
 *.pyd
 *.egg
@@ -33,7 +33,7 @@ build/
 .eggs/
 *.so
 
-# ── Virtuelle Umgebung (uv erstellt .venv/) ────────────────────────────────
+# ── Umgebung ───────────────────────────────────────────────────────────────
 .venv/
 .env
 *.env
@@ -42,52 +42,17 @@ build/
 .ipynb_checkpoints/
 *.ipynb_metadata
 
-# ── IDE & OS ───────────────────────────────────────────────────────────────
-.vscode/settings.json
-.idea/
-.DS_Store
-Thumbs.db
-*.swp
-*.swo
-
-# ── Public (optional – kommentiere aus, wenn du Public-Artefakte tracken willst) ───
-# public/img/
-# public/md/
-
-
-
-
-# ==========================================
-# Environments & Dependency Management (uv/Python)
-# ==========================================
-.venv/
-__pycache__/
-*.py[cod]
-*$py.class
-
-# ==========================================
-# Data Storage & Local Databases
-# ==========================================
-# Ignoriert lokale DuckDB-Dateien und Temporärdateien
-data/*.duckdb
-data/*.duckdb.wal
-data/*.csv
-data/*.parquet
-
-# ==========================================
-# dbt Build Artifacts & Credentials
-# ==========================================
-# dbt execution target folder & installed packages
+# ── dbt ────────────────────────────────────────────────────────────────────
 target/
 dbt_packages/
 dbt_modules/
+dbt_internal_packages/
+logs/
+.user.yml
 
-# Credentials / Profiles (muss lokal bleiben, nicht ins Repo!)
-profiles.yml
-
-# ==========================================
-# Operating System & IDE Artifacts
-# ==========================================
+# ── IDE & OS ───────────────────────────────────────────────────────────────
+.vscode/
+.idea/
 .DS_Store
 .DS_Store?
 ._*
@@ -95,14 +60,5 @@ profiles.yml
 .Trashes
 ehthumbs.db
 Thumbs.db
-
-# VS Code / JetBrains
-.vscode/
-.idea/
-dbt_internal_packages/
-
-
-logs/
-.user.yml
-.duckdb
-data/*.duck
+*.swp
+*.swo

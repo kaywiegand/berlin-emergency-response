@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: stg_missions_daily
+    description: "Bereinigtes Staging-Modell der rohen Berliner Notfalleinsätze. Standardisiert Spaltennamen und Typen."
+    
+    columns:
+      - name: mission_date
+        description: "Das standardisierte Datum des Einsatztages"
+        tests:
+          - unique
+          - not_null
+
+      - name: total_missions
+        description: "Gesamteinsätze auf Staging-Ebene"
+        tests:
+          - not_null

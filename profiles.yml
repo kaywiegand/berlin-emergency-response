@@ -1,0 +1,7 @@
+berlin_emergency:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: data/berlin_emergency.duckdb
+      threads: 4

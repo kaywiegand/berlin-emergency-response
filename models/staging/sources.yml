@@ -1,0 +1,18 @@
+version: 2
+
+# Definition der Datenquellen (Sources) für dbt
+sources:
+  - name: berlin_emergency         # Logischer Name der Quelle (wird in {{ source(...) }} genutzt)
+    schema: main                   # Das Schema in DuckDB, in dem die Rohdaten liegen (Standard: main)
+    description: "Rohdaten der Berliner Feuerwehr Einsatzstatistiken"
+    
+    tables:
+      - name: raw_missions_daily   # Der exakte Tabellenname der Rohdaten-Tabelle in deiner DuckDB
+        description: "Tägliche Einsatzzahlen nach Kategorie (Rettungsdienst, Brand, etc.)"
+        
+        # Optionale Validierung: Prüft, ob wichtige Spalten existieren
+        columns:
+          - name: datum
+            description: "Datum des Einsatztages"
+          - name: gesamteinsaetze
+            description: "Gesamtzahl aller absolvierten Einsätze an diesem Tag"

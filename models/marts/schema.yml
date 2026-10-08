@@ -1,0 +1,32 @@
+version: 2
+
+models:
+  - name: fct_missions_daily
+    description: "Finales Mart-Modell der täglichen Berliner Notfalleinsätze inklusive 7-Tage-Durchschnitt und Abweichungen."
+    
+    columns:
+      - name: mission_date
+        description: "Das Datum des Einsatztages"
+        tests:
+          - unique
+          - not_null
+
+      - name: total_missions
+        description: "Gesamtzahl aller Einsätze an diesem Tag"
+        tests:
+          - not_null
+
+      - name: rescue_missions
+        description: "Anzahl Rettungsdienst-Einsätze"
+        tests:
+          - not_null
+
+      - name: fire_missions
+        description: "Anzahl Brandbekämpfungs-Einsätze"
+        tests:
+          - not_null
+
+      - name: total_missions_7d_avg
+        description: "Rollierender 7-Tage-Mittelwert der Gesamteinsätze"
+        tests:
+          - not_null
