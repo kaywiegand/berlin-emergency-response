@@ -25,13 +25,13 @@ Upstream hat keinen Tagesendpunkt: täglich wird die Datei des laufenden Jahres 
 
 | Schritt | Inhalt |
 | :--- | :--- |
-| **S0 Fundament** | `.gitignore` korrigieren, `profiles.yml` committen, CLAUDE/ROADMAP/BACKLOG/PROCESS_LOG/Makefile, README neu, Chat-Reste entfernen, CONCEPT erweitern, `PROJECTS.md` |
+| **S0 Fundament** | Standard-Dateien aus `wgnd-scaffolding` (Typ `data`, Bestand nachziehen, nichts überschreiben): CLAUDE, ROADMAP, BACKLOG, PROCESS_LOG, Makefile, `public/`-Skeleton; `.gitignore` korrigieren, `profiles.yml` committen, `wgnd` per Git-URL einbinden, README neu, CONCEPT erweitern, `PROJECTS.md` |
 | **S1 Ingestion** | `scripts/ingest.py` ersetzt Fake-Skript: `--full` und Daily-Modus, idempotent, harter Fehler statt Fallback, Spaltenprüfung, Fixture |
 | **S2 dbt-Kern** | Sources + Freshness, Seeds, Staging, Macros, Intermediate, Marts (incremental), Tests |
-| **S3 Geodaten + App** | LOR-Polygone, Parquet-Export, Streamlit auf Parquet, Choropleth mit Jahres-Slider, KPI-Zeile, Event-Marker |
+| **S3 Geodaten + App** | LOR-Polygone, Parquet-Export, Streamlit auf Parquet, Choropleth mit Jahres-Slider, KPI-Zeile, Event-Marker, Plotly-Theme aus `wgnd`-Palette; `/project-case check` als Zwischenprüfung |
 | **S4 Automatisierung** | `daily.yml` (Cron, Cache, Freshness, Build, Export, Bot-Commit), `pr.yml`, Persistenz der Snapshot-Historie |
 | **S5 dbt-Vollständigkeit + Governance** | Snapshots, Docs, Exposures, Selectors, Contracts, Access/Groups, Versions, Meta, Qualitätsbericht |
-| **S6 Konsistenz + Case** | Notebooks, `wgnd`-Theme, `/project-review`, `/project-case check` |
+| **S6 Konsistenz + Case** | Notebooks 00–06 nach `CONVENTIONS.md` mit `wgnd` (inspect, viz); `/project-review` (nach S5), `/project-case` story → slides; `public/`-Hub mit Link zur Live-App |
 
 ## Komponente → Schritt
 
@@ -54,6 +54,8 @@ Upstream hat keinen Tagesendpunkt: täglich wird die Datei des laufenden Jahres 
 | **Qualitätsbericht** | Testabdeckung je Schicht, bekannte Datenlücken | S5 |
 | CI / Orchestrierung | GitHub Actions, täglich + PR | S4 |
 | Serving | Streamlit + Plotly | S3 |
+| `wgnd`-Toolkit | Git-URL-Dependency; Plotly-Theme als neues, versioniertes Toolkit-Feature; Notebooks | S0, S3, S6 |
+| Portfolio-Skills | Init-Standard, `check` nach S3, `review` nach S5, `story`/`slides` | S0, S3, S5, S6 |
 
 ## Qualitäts- und Governance-Details (S5)
 
@@ -74,7 +76,5 @@ Wetter (Open-Meteo/DWD), Einwohner je Planungsraum, Wachen-Koordinaten, Turnout-
 - Duplikate ohne Einsatz-ID, nachträgliche Korrekturen in Vorjahresdateien.
 
 ## Verifikation (Ende-zu-Ende)
-
-- `ingest.py --full` lädt Daten bis gestern; kaputte URL bricht ab; zweiter Lauf erzeugt keine Duplikate.
-- `dbt build` grün, Freshness grün; manipulierter Wert lässt Abgleich-Test rot werden.
+- `ingest.py --full` lädt Daten bis gestern, bricht bei kaputter URL ab, erzeugt keine Duplikate; `dbt build` + Freshness grün, manipulierter Wert lässt Abgleich-Test rot werden.
 - Karte zeigt 143/542 Flächen ohne Lücken; `workflow_dispatch` testet Cache, Bot-Commit, Redeploy.
