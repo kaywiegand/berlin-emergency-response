@@ -12,7 +12,11 @@ dependencies = [
     "ipykernel>=7.4.0",
     "plotly>=7.1.0",
     "streamlit>=1.65.0",
+    "wgnd",
 ]
+
+[tool.uv.sources]
+wgnd = { git = "https://github.com/kaywiegand/wgnd-toolkit" }
 
 [build-system]
 requires = ["hatchling"]
