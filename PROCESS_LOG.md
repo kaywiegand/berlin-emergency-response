@@ -5,9 +5,9 @@
 
 | Feld | Inhalt |
 | :--- | :--- |
-| Status | S1 Ingestion abgeschlossen |
+| Status | S2 dbt-Kern abgeschlossen |
 | Plan | `docs/PLAN.md` |
-| Nächster Schritt | S2 dbt-Kern: Sources auf die neuen Raw-Tabellen |
+| Nächster Schritt | S3 Geodaten + App: LOR-Polygone (BACKLOG 3), Parquet-Export, Streamlit neu |
 
 ---
 
@@ -30,3 +30,13 @@
 - Entscheidung: Unbekannte neue Spalten = Warnung, fehlende = Abbruch.
 - Befund: Regional-Daten gibt es nur ab 2024 (BACKLOG 9). Alte Tabelle `raw_missions_daily` bleibt bis S2 (BACKLOG 6).
 - Nächster Schritt: S2 Sources + Freshness auf `_loaded_at`, Seeds, Staging.
+
+### 2026-10-08 — S2 dbt-Kern
+
+- Sources + Freshness, 3 Seeds, 6 Staging-, 2 Intermediate-, 6 Mart-Modelle, Macros (`is_within_timegoal`, `safe_pct`, `stg_regional`), Var `timegoal_seconds`. Details: `models/*/schema.yml`, `docs/DATA_DICTIONARY.md`.
+- Entscheidung: zwei getrennte Kennzahlen. Offiziell (Regional, 2024–26, mit Hinweis auf Definitionsbruch) und eigene Näherung im Zeitverlauf je Kritikalitätsstufe statt binärem "kritisch". Begründung: BACKLOG 1/2.
+- Entscheidung: alte Modellkette, `raw_missions_daily` und App-Abhängigkeit entfernt; App bis S3 defekt (BACKLOG 6).
+- Entscheidung: `fct_missions_daily_district` inkrementell über `loaded_at`, `delete+insert` auf `mission_date`; Ingestion ersetzt Jahrespartitionen mit neuem `_loaded_at`.
+- Verifiziert: `dbt build` grün (Tests, Singular-Tests), Freshness pass, Rerun ohne Duplikate, manipulierter Regional-Wert lässt `assert_regional_matches_mission_data` rot werden.
+- Befunde: Regional-Totals weichen von Mission_Data um bis ~0,3 % ab (Toleranz 1 %). Telefonie-Störung betrifft nur Call-Daten, nicht Einsätze (`seed_events`).
+- Nächster Schritt: S3.

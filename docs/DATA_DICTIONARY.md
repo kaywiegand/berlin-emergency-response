@@ -1,35 +1,32 @@
-# Data Dictionary – Berlin Emergency Response
+# Data Dictionary — Berlin Emergency Response
 
-Dieses Dokument beschreibt die Quelltabellen (Sources) und die daraus abgeleiteten Staging-Modelle im Data Warehouse.
+> Einstieg in die Datenschichten. Spaltenbeschreibungen und Tests stehen in den `schema.yml` der Schichten, die generierte dbt-Doku (`dbt docs`, S5) ist die Referenz.
 
----
+## Raw (`scripts/ingest.py`)
 
-## 1. Raw Layer (`raw_fire_department`)
+Alle Spalten `VARCHAR`, dazu `_partition`, `_source_file`, `_loaded_at`. Partition = Jahr, Quartal, `current` oder `all`.
 
-### `raw_missions_daily`
-Unveränderte Rohdaten der täglichen Einsatzzahlen der Berliner Feuerwehr.
+| Tabelle | Quelle | Partition |
+| :--- | :--- | :--- |
+| `raw_mission_data` | `Mission_Data/*.csv` | Jahr (2018–) |
+| `raw_daily_mission_data` | `Daily_Data/BFw_mission_data_daily.csv` | `all` |
+| `raw_regional_planning_room` | `Regional_Data/<Jahr>` | Jahr (2024–) |
+| `raw_regional_district_area` | `Regional_Data/<Jahr>` | Jahr (2024–) |
+| `raw_regional_prediction_area` | `Regional_Data/<Jahr>` | Jahr (2024–) |
+| `raw_turnout_times` | `Turnout_Times/*.csv` | Quartal, `current` |
 
-| Spalte | Datentyp | Beschreibung | Beispiel |
-| :--- | :--- | :--- | :--- |
-| `datum` | VARCHAR / DATE | Datum des Einsatztages (Format `YYYY-MM-DD`) | `2026-01-15` |
-| `einsaetze_gesamt` | BIGINT | Gesamtzahl aller dispositionierten Einsätze an diesem Tag | `420` |
-| `rettungsdienst_einsaetze` | BIGINT | Anzahl der medizinischen Rettungseinsätze (RTW/NEF) | `350` |
-| `feuerwehr_einsaetze` | BIGINT | Anzahl der Brandeinsätze und technischen Hilfeleistungen | `70` |
-| `antwortzeit_mediana` | DOUBLE | Median der Antwortzeit/Dispositionszeit in Sekunden | `495.2` |
-| `_loaded_at` | TIMESTAMP | Technischer Zeitstempel der Ingestion in DuckDB | `2026-10-05 14:00:00` |
+## dbt
 
----
+| Schicht | Modelle | Quelle der Beschreibung |
+| :--- | :--- | :--- |
+| Seeds | `seed_districts`, `seed_dispatch_codes`, `seed_events` | `seeds/schema.yml` |
+| Staging (view) | `stg_missions`, `stg_daily_missions`, `stg_regional_*` (3), `stg_turnout_times` | `models/staging/schema.yml` |
+| Intermediate (view) | `int_missions_enriched`, `int_regional_timegoal` | `models/intermediate/schema.yml` |
+| Marts | `dim_district`, `dim_region`, `fct_timegoal_region_yearly`, `fct_missions_daily_district` (incremental), `fct_missions_daily_citywide`, `fct_turnout_times_quarterly` | `models/marts/schema.yml` |
 
-## 2. Staging Layer (`staging`)
+## Kennzahlen
 
-### `stg_missions_daily`
-Bereinigtes, typisiertes und auf Englisch standardisiertes Staging-Modell.
-
-| Spalte | Datentyp | Primärschlüssel / Tests | Beschreibung |
-| :--- | :--- | :--- | :--- |
-| `mission_date` | DATE | PK (`unique`, `not_null`) | Datum des Einsatztages |
-| `total_missions` | INTEGER | `>= 0` | Gesamtzahl der Einsätze |
-| `rescue_missions` | INTEGER | `>= 0` | Anzahl Rettungsdienst-Einsätze |
-| `fire_missions` | INTEGER | `>= 0` | Anzahl Feuerwehr-Einsätze |
-| `median_response_time_seconds` | DOUBLE | NULL oder `> 0` | Median der Antwortzeit in Sekunden |
-| `loaded_at` | TIMESTAMP | `not_null` | Ingestion-Zeitstempel für Auditing / Freshness |
+| Kennzahl | Quelle | Hinweis |
+| :--- | :--- | :--- |
+| Hilfsfrist-Quote (offiziell) | `fct_timegoal_region_yearly.ems_critical_timegoal_quote` | 2024–2026. Grundgesamtheit "kritisch" ändert sich 2024→2025 (`seed_events`) |
+| Anteil Einsätze ≤ Schwelle (eigene Näherung) | `fct_missions_daily_district.mission_count_within_timegoal` | Schwelle `var timegoal_seconds` (600, Vermutung); je Kritikalitätsstufe, kein binäres "kritisch" |
