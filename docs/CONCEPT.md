@@ -93,3 +93,27 @@ Dashboard (Evidence.dev)  ──►  GitHub Pages
 1. Pipeline läuft täglich via GitHub Actions automatisiert[cite: 1].
 2. Hilfsfrist-Definition ist nachvollziehbar dokumentiert und im Modell umgesetzt[cite: 1].
 3. Upstream-Daten werden gezielt ohne 6,8 GB Repository-Clone eingebunden[cite: 1, 2].
+
+---
+
+## 7 · Erweiterung (Stand 2026-10-08, S0)
+
+> Ergänzt die Abschnitte 1–6. Bei Widerspruch gilt dieser Abschnitt und `docs/PLAN.md`.
+
+**Änderungen gegenüber Abschnitt 3**
+- Serving: **Streamlit + Plotly** statt Evidence.dev. Grund: Karte (Choropleth) mit Jahres-Slider und Anbindung an `wgnd`-Palette.
+- Dashboard liest einen Parquet-Export der Marts, nicht die DuckDB-Datei direkt.
+
+**Zielbild**
+- Zeitverlauf aus `Mission_Data` (Einsatz, Bezirk, Tag).
+- Hilfsfrist-Quote und Karte aus `Regional_Data` (Planungsräume, Bezirksregionen, Prognoseräume; nur jährlich).
+- Ingestion täglich: Datei des laufenden Jahres neu laden, Vorjahre einmalig. Kein Fallback auf erfundene Daten.
+
+**Zertifizierungsabdeckung, ergänzt**
+- Contracts, Access/Groups, Model Versions, Meta-Tags, Qualitätsbericht (S5).
+- Zuordnung Komponente → Schritt: `docs/PLAN.md`.
+
+**Phase 2 (außerhalb des Umfangs)**
+Wetter, Einwohner je Planungsraum, Wachen-Koordinaten, Turnout-Vergleich, KV-/Call-Data.
+
+**Bekannte Altlasten in diesem Dokument:** `[cite: n]`-Marker und die Evidence.dev-Nennungen in Abschnitt 3 sind Überbleibsel (BACKLOG 5).
