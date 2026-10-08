@@ -7,8 +7,8 @@
 
 ## Phasen
 
-- [ ] **S0 Fundament** — Repo-Hygiene, Standard-Dateien, `wgnd`
-- [ ] **S1 Ingestion** — `scripts/ingest.py`, idempotent, kein Fallback
+- [x] **S0 Fundament** — Repo-Hygiene, Standard-Dateien, `wgnd`
+- [x] **S1 Ingestion** — `scripts/ingest.py`, idempotent, kein Fallback
 - [ ] **S2 dbt-Kern** — Sources, Seeds, Staging, Macros, Intermediate, Marts, Tests
 - [ ] **S3 Geodaten + App** — LOR-Polygone, Parquet, Choropleth, Plotly-Theme
 - [ ] **S4 Automatisierung** — GitHub Actions täglich + PR
