@@ -10,7 +10,6 @@ Prio: `1` = hoch · `2` = mittel · `3` = niedrig
 | 2 | Schwelle 600 s weiter Vermutung: konsistent mit Median/Quote 2025, aber nicht über alle Jahre reproduzierbar | 2 | S2 |
 | 4 | Duplikate ohne Einsatz-ID und nachträgliche Korrekturen in Vorjahresdateien prüfen | 2 | PLAN (S1/S2) |
 | 5 | `docs/CONCEPT.md`: Abschnitte 3–6 (Serving Evidence.dev → Streamlit, `[cite: n]`-Artefakte) an Abschnitt 7 angleichen | 1 | "Kritisch": Stichtag 25.03.2025 und RD1/RD2 sind belegt (BF Open-Data-Seite, eigene Daten). Offen: wie die BF "kritisch" vor dem Stichtag aus den Dispatchcodes berechnet hat (genaue Regel) — bei BF nachfragen | 2 | S2 |
-| 6 | `scripts/check_files.py` hängt an entfernten Modellen — löschen | 2 | S1/S3 |
 | 7 | Scaffolding: `DE` als CLI-Choice (→ `wgnd-scaffolding/BACKLOG.md`) | 3 | S0 |
 | 8 | `ingest.py` bricht am Jahreswechsel hart ab, falls die Datei des neuen Jahres noch fehlt (404) — Verhalten für `daily.yml` festlegen | 2 | S1 |
 | 10 | Daily_Data: Lücken in der Zeitreihe (sieben Tage 2026) per dbt-Test erkennen und im Qualitätsbericht (S5) dokumentieren | 3 | S2 |
