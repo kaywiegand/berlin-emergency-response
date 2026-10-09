@@ -202,7 +202,7 @@ wheels = [
 [[package]]
 name = "berlin-emergency-response"
 version = "0.1.0"
-source = { virtual = "." }
+source = { editable = "." }
 dependencies = [
     { name = "dbt-duckdb" },
     { name = "duckdb" },
@@ -4074,8 +4074,8 @@ wheels = [
 
 [[package]]
 name = "wgnd"
-version = "0.3.0"
-source = { git = "https://github.com/kaywiegand/wgnd-toolkit#e3dd4037c195b5f84aa7af14eb2443b3a9cc0118" }
+version = "0.4.0"
+source = { git = "https://github.com/kaywiegand/wgnd-toolkit#d2fa10bf4b4f05d3411fb12a878e739856cd77e7" }
 dependencies = [
     { name = "ipykernel" },
     { name = "ipython" },
