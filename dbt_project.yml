@@ -25,8 +25,10 @@ models:
       +materialized: table
 
 vars:
-  # Hilfsfrist threshold on response_time (seconds). Assumption, see docs/PLAN.md "Offene Verifikationen".
-  timegoal_seconds: 600
+  # Hilfsfrist threshold on response_time (seconds) per mission group. Assumption for ems, see docs/PLAN.md.
+  # fire: the goal is 14 firefighters in 15 minutes (not a first-vehicle time); technical rescue: no time goal.
+  timegoal_seconds:
+    ems: 600
 
 seeds:
   berlin_emergency_response:
@@ -36,6 +38,10 @@ seeds:
     seed_dispatch_codes:
       +column_types:
         dispatchcode: varchar
+    seed_dispatch_code_map:
+      +column_types:
+        dispatchcode: varchar
+        dispatch_level: varchar
     seed_stations:
       +column_types:
         station_id: varchar

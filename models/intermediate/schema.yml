@@ -12,7 +12,7 @@ models:
               arguments:
                 values: [ems, fire, technical, other]
       - name: is_within_timegoal
-        description: True if response_time_seconds <= var timegoal_seconds; null without response time.
+        description: True if response_time_seconds <= the threshold of the mission group (var timegoal_seconds); null without response time and for groups without a time goal (fire, technical, other).
 
   - name: int_regional_timegoal
     description: The three Regional_Data levels unioned, with district code and time-goal quotas.

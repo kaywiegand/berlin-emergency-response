@@ -7,10 +7,35 @@ seeds:
       - name: district_code
         data_tests: [unique, not_null]
   - name: seed_dispatch_codes
-    description: Dispatch codes with names, derived from the distinct pairs in Mission_Data. About half have no name upstream.
+    description: >
+      Complaint categories (first two characters of the dispatch code) with their names, from the BF code table
+      (AMPDS, ambulance service only, Stand in the table's disclaimer). Categories above 34 (non-medical) are not in the table.
     columns:
       - name: dispatchcode
         data_tests: [unique, not_null]
+  - name: seed_dispatch_code_map
+    description: >
+      Per (category, level A-E/O): the share of codes in the BF table that fall into each emergency category RD1..RD5.
+      Missions carry only category and level, so this is a prior per combination, unweighted by mission volume, not a lookup.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [dispatchcode, dispatch_level]
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: abs(share_rd1 + share_rd2 + share_rd3 + share_rd4 + share_rd5 + share_other - 1) < 0.001
+    columns:
+      - name: dispatchcode
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('seed_dispatch_codes')
+                field: dispatchcode
+      - name: dispatch_level
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [A, B, C, D, E, O]
   - name: seed_events
     description: Documented events and definition changes that explain breaks in the data. Only entries with a source.
     columns:

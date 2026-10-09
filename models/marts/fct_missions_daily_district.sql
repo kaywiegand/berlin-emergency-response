@@ -17,6 +17,7 @@ select
     criticality_tier,
     count(*) as mission_count,
     count(*) filter (where has_response_time) as mission_count_with_response_time,
+    count(*) filter (where is_within_timegoal is not null) as mission_count_with_timegoal,
     count(*) filter (where is_within_timegoal) as mission_count_within_timegoal,
     median(response_time_seconds) as response_time_median_seconds,
     avg(response_time_seconds) as response_time_mean_seconds,

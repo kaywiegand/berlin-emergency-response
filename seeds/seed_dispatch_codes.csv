@@ -1,5 +1,5 @@
 dispatchcode,dispatchcode_name
-01,"Bauchschmerzen,-beschwerden"
+01,"Bauchschmerzen, -beschwerden"
 02,"Allergie (Überreaktion) / Kontakt mit giftigen Tieren (Stiche, Bisse)"
 03,Tierbiss / Tierangriff
 04,Körperverletzung / Sexualdelikt / Elektroschocker
@@ -18,7 +18,7 @@ dispatchcode,dispatchcode_name
 17,Sturz / Absturz
 18,Kopfschmerzen
 19,Herzbeschwerden / Implantierter Defibrillator
-20,Hitze- / Kälteeinwirkung
+20,"Hitze-, Kälteprobleme"
 21,Blutung / Wunden
 22,Unzugängliche / Verschüttete / Eingeklemmte / Eingeschlossene Person (Nicht verkehrsbedingt)
 23,Überdosis / Vergiftung (Einnahme)
@@ -33,38 +33,4 @@ dispatchcode,dispatchcode_name
 32,Unklares Geschehen (Person in Notlage)
 33,Anforderung von Rettungsmittel durch Versorgungseinrichtung / Palliative Medizin / Einweisung
 34,AUM (Automatische Unfallmeldung)
-35,
-36,
-37,
-52,
-53,
-54,
-55,
-56,
-57,
-58,
-59,
-60,
-61,
-62,
-63,
-64,
-65,
-66,
-67,
-68,
-69,
-70,
-71,
-72,
-73,
-74,
-75,
-76,
-77,
-78,
-79,
-81,
-82,
-83,
-90,
+39,Amoklage

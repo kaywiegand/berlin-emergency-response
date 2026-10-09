@@ -54,7 +54,7 @@ models:
             combination_of_columns: [mission_date, district_code, mission_group, criticality_tier]
       - dbt_utils.expression_is_true:
           arguments:
-            expression: mission_count_within_timegoal <= mission_count_with_response_time
+            expression: mission_count_within_timegoal <= mission_count_with_timegoal
     columns:
       - name: district_code
         data_tests:

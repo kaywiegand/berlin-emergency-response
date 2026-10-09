@@ -37,11 +37,14 @@ models:
                 min_value: 1
                 max_value: 10000
       - name: dispatchcode
+        description: Complaint category (2 characters). The BF code table covers categories up to 34; higher numbers (used by fire, technical and some ambulance missions) are not in it.
         data_tests:
           - relationships:
               arguments:
                 to: ref('seed_dispatch_codes')
                 field: dispatchcode
+              config:
+                where: "dispatchcode < '35'"
 
   - name: stg_daily_missions
     description: City-wide daily series from Daily_Data.
