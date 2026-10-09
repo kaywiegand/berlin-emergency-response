@@ -129,3 +129,5 @@ Grenzen der Daten: keine Uhrzeit, keine Einsatzkoordinaten (nur Bezirk), Regione
 
 **Arbeitsweise:** Notebooks (`00`–`04`) sind die Basisarbeit, die App zeigt nur geprüfte Ergebnisse aus `04_insights`.
 **Medallion:** Bronze = `raw_*`, Silver = `stg_*`/`int_*`, Gold = `fct_*`/`dim_*`.
+
+**Fristen (Stand 2026-10-09):** Für Rettungsdienst, Brandbekämpfung und technische Hilfeleistung gelten unterschiedliche Vorgaben (siehe README "Fristen und Schutzziele"). Gesamtbetrachtungen werden deshalb immer nach Einsatzart aufgeschlüsselt; eine globale Schwelle gibt es nicht.

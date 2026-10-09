@@ -10,6 +10,27 @@ Die Notebooks (`notebooks/00`–`04`) sind die Analysearbeit, die App zeigt die 
 
 ---
 
+## Fristen und Schutzziele
+
+Die Berliner Feuerwehr arbeitet in drei Einsatzarten, für die **unterschiedliche Vorgaben** gelten. Eine einzige "Hilfsfrist" gibt es nicht.
+
+| Einsatzart | Vorgabe (Schutzziel) | Gemessen als |
+| :--- | :--- | :--- |
+| **Rettungsdienst** | Zwei Einsatzkräfte innerhalb von 10 Minuten (Planungsgröße), Erreichungsgrad 90 % vereinbart | Zeit bis zum Eintreffen des ersten Fahrzeugs |
+| **Brandbekämpfung** | 14 Funktionen innerhalb von 15 Minuten; Erreichungsgrad 90 % in Schutzzielklasse A, 50 % in Klasse B | Zeit bis zum ersten wasserführenden Fahrzeug, zur ersten Drehleiter und bis 14 Einsatzkräfte vor Ort sind |
+| **Technische Hilfeleistung** | keine Frist gefunden | nur Antwortzeit-Statistik, keine Hilfsfrist-Auswertung der Feuerwehr |
+
+Quellen: [Senatsantwort 2019](https://pardok.parlament-berlin.de/starweb/adis/citat/VT/19/SchrAnfr/S19-19457.pdf), [Jahresbericht 2022](https://www.berliner-feuerwehr.de/fileadmin/bfw/dokumente/Publikationen/Jahresberichte_infografik/Infografik_Jahresbericht_2022_innen.pdf), [Jahresbericht 2023](https://www.berliner-feuerwehr.de/fileadmin/bfw/dokumente/Publikationen/Jahresberichte_infografik/Infografik_Jahresbericht_2023.pdf), [Open-Data-Seite der Feuerwehr](https://www.berliner-feuerwehr.de/service/open-data/). Den Gesetzestext haben wir nicht geprüft.
+
+**Folgen für das Projekt**
+
+- **Gesamtbetrachtungen sind immer nach Einsatzart aufgeschlüsselt.** Eine Zahl über alle Einsätze mischt Vorgaben, die nicht vergleichbar sind. Jede Auswertung zeigt zuerst das Gesamtbild und direkt daneben die Aufteilung in Rettungsdienst, Brandbekämpfung und technische Hilfeleistung, jeweils mit der passenden Frist (oder dem Hinweis, dass es keine gibt).
+- **Die Hilfsfrist-Quote ist nur für den Rettungsdienst und die Brandbekämpfung definiert.** Die offizielle Quote in den Regionaldaten gilt nur für *kritische* Rettungsdiensteinsätze und für Brände.
+- **"Kritisch" ist kein stabiler Begriff:** Seit dem 25.03.2025 klassifiziert die Feuerwehr Rettungsdiensteinsätze in Notfallkategorien (RD1 bis RD5). Die Zahl "kritischer" Einsätze fällt dadurch sprunghaft; Jahresvergleiche der Quote sind nur mit Vorsicht möglich.
+- **Weitere Strukturänderung:** Die Einführung des RTW-B (Basic Life Support) um den Jahreswechsel 2022/23 verschiebt die Hilfsfrist ebenfalls, laut Darstellung der Feuerwehr.
+
+---
+
 ## Architektur
 
 ```

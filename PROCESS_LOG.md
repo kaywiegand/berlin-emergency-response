@@ -100,3 +100,4 @@
 - Befund: RD1+RD2 bleibt in der Tagesreihe über den Stichtag hinweg bei rund der Hälfte der RD-Einsätze und ist damit die vergleichbare Grundgesamtheit; die Annahme "Stufe D/E als kritisch" ist zu eng (C/D/E liegt volumenmäßig näher). Notebooks `01_exploration_daily`/`_regional`/`_missions` und die App-Texte sind nach der Feedback-Runde anzupassen.
 - Befund: Einsatzcodes-Tabelle der BF (AMPDS, Stand 21.05.2026) ist noch nicht eingebunden; `seed_dispatch_codes` stammt aus Mission_Data (BACKLOG 26).
 - Offen aus dem Dialog: dbt-Schwelle 600 s gilt für alle Einsatzgruppen (BACKLOG 25).
+- Entscheidung (Kay): Die unterschiedlichen Fristen je Einsatzart gehören in die README; Gesamtbetrachtungen werden immer nach Einsatzart aufgeschlüsselt, die Aufteilung ist Pflicht. Umgesetzt in README ("Fristen und Schutzziele"), CLAUDE.md (Konvention), CONCEPT; Umsetzung in Notebooks/Marts/App steht aus (BACKLOG 24, 25).
