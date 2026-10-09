@@ -64,3 +64,10 @@
 - Notebook-Plan: `00_introduction`, `01_exploration_<quelle>`, `02_preparation`, `03_analysis_<dimension>`, `04_insights` → `app_data/insights.json`. Medallion: raw = Bronze, stg/int = Silver, fct/dim = Gold.
 - Anreicherung Stufe 1 (Feiertage/Ferien, Wetter) nach dem ersten EDA-Durchlauf; Stufe 2 später. Politik nur als belegte Annotation.
 - Alte Notebooks gelöscht. `BACKLOG.md` neu geschrieben, weil ein Regex-Ersetzen früher Zeilen verschmolzen hatte; Inhalt unverändert bis auf Zahlen-Bereinigung (Review-Finding).
+
+### 2026-10-09 — 00_introduction geschrieben
+
+- `notebooks/00_introduction.ipynb`: Facts, Fragestellung mit Dimensionen/Vermutungen/Grenzen, Quellen-Tabelle (Inhalt, Warum, Wichtig), Antwortzeit vs. Hilfsfrist, Medallion, dbt-Komponenten (Wie/Warum), Notebook-Map; Setup-Zelle zeigt Zeilen je Schicht live aus DuckDB. `make notebooks` führt alle Notebooks aus.
+- Befund: Die DuckDB enthielt noch Objekte der in S2 entfernten Modelle (`fct_missions_daily`, `int_missions_daily_enhanced`, `stg_missions_daily`); dbt löscht entfernte Modelle nicht. Manuell gelöscht.
+- Offen: Bedeutung der `mission_count_rd1`–`rd5` und `KV_Data` nicht geprüft, deshalb nicht erklärt.
+- Nächster Schritt: `01_exploration_missions` (mit `wgnd.inspect`), dann die weiteren Quellen.

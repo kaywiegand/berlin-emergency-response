@@ -1,7 +1,7 @@
 # Makefile – berlin-emergency-response
 # Verwendung: make <target>   (Voraussetzung: uv)
 
-.PHONY: setup ingest ingest-full geo export test dbt-deps dbt-parse dbt-build app clean help
+.PHONY: setup ingest ingest-full geo export notebooks test dbt-deps dbt-parse dbt-build app clean help
 
 setup: ## Umgebung + Dependencies installieren
 	uv sync
@@ -18,6 +18,9 @@ geo: ## LOR-Polygone vom Geoportal laden und vereinfachen
 
 export: ## Marts nach app_data/*.parquet exportieren
 	uv run python scripts/export_parquet.py
+
+notebooks: ## alle Notebooks ausführen (Outputs gespeichert)
+	uv run jupyter nbconvert --to notebook --execute --inplace notebooks/*.ipynb
 
 test: ## Python-Tests
 	uv run pytest tests -q
