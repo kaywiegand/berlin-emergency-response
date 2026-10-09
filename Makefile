@@ -4,6 +4,7 @@
 # dbt lives in dbt/; run all dbt commands from the repo root via these variables
 export DBT_PROJECT_DIR := dbt
 export DBT_PROFILES_DIR := dbt
+export DBT_LOG_PATH := dbt/logs
 
 .PHONY: setup ingest ingest-full geo stations export notebooks test dbt-deps dbt-parse dbt-build app clean help
 
