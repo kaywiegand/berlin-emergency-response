@@ -36,7 +36,8 @@ data/*.duckdb        ← Warehouse (ignoriert)
 models/              ← dbt: staging → intermediate → marts
 seeds/ macros/ snapshots/ tests/   ← dbt
 scripts/             ← Ingestion
-src/                 ← Streamlit-App + Plot-Utils
+src/                 ← Streamlit-App (liest nur app_data/)
+app_data/            ← Parquet-Export + geo/ (versioniert, von der App gelesen)
 notebooks/           ← nach CONVENTIONS.md
 public/              ← Web-Root (Pages), Quelle public/md/slides.yaml
 docs/                ← PLAN, CONCEPT, DATA_SOURCES, DATA_DICTIONARY
@@ -60,5 +61,7 @@ docs/                ← PLAN, CONCEPT, DATA_SOURCES, DATA_DICTIONARY
 make setup      # uv sync + dbt deps
 make dbt-build  # dbt build
 make dbt-parse  # Syntaxcheck
+make export     # Marts -> app_data/*.parquet
+make geo        # LOR-Polygone (selten nötig)
 make app        # Streamlit
 ```

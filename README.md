@@ -45,6 +45,7 @@ Voraussetzung: [`uv`](https://docs.astral.sh/uv/).
 ```bash
 make setup        # uv sync + dbt deps
 make dbt-build    # Seeds, Modelle, Tests
+make export       # Marts nach app_data/ exportieren
 make app          # Streamlit-Dashboard
 ```
 
@@ -60,8 +61,9 @@ make app          # Streamlit-Dashboard
 ├── docs/            # Plan, Konzept, Quellen, Datenwörterbuch
 ├── models/          # dbt: staging, intermediate, marts
 ├── macros/ seeds/ snapshots/ tests/   # dbt
-├── scripts/         # Ingestion
-├── src/             # Streamlit-App, Plot-Utilities
+├── scripts/         # Ingestion, LOR-Polygone, Parquet-Export
+├── app_data/        # Export für die App (Parquet, GeoJSON)
+├── src/             # Streamlit-App, Plot- und Metrik-Module
 ├── notebooks/       # Exploration und Analyse
 ├── public/          # Web-Root für GitHub Pages
 ├── dbt_project.yml · profiles.yml · packages.yml
@@ -80,4 +82,5 @@ Tests liegen deklarativ in den `schema.yml` der dbt-Schichten (`unique`, `not_nu
 
 ## Lizenz und Datenquelle
 
-Daten: Berliner Feuerwehr, [BF-Open-Data](https://github.com/Berliner-Feuerwehr/BF-Open-Data), CC BY 4.0.
+Einsatzdaten: Berliner Feuerwehr, [BF-Open-Data](https://github.com/Berliner-Feuerwehr/BF-Open-Data), CC BY 4.0.
+Flächen: Amt für Statistik Berlin-Brandenburg / Statistische Einheiten im INSPIRE-Datenmodell (Lebensweltlich Orientierte Räume 01.01.2021), CC BY 3.0 DE.

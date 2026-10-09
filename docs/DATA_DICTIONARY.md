@@ -30,3 +30,15 @@ Alle Spalten `VARCHAR`, dazu `_partition`, `_source_file`, `_loaded_at`. Partiti
 | :--- | :--- | :--- |
 | Hilfsfrist-Quote (offiziell) | `fct_timegoal_region_yearly.ems_critical_timegoal_quote` | 2024–2026. Grundgesamtheit "kritisch" ändert sich 2024→2025 (`seed_events`) |
 | Anteil Einsätze ≤ Schwelle (eigene Näherung) | `fct_missions_daily_district.mission_count_within_timegoal` | Schwelle `var timegoal_seconds` (600, Vermutung); je Kritikalitätsstufe, kein binäres "kritisch" |
+
+## App-Export (`scripts/export_parquet.py`, `scripts/fetch_lor.py`)
+
+| Datei | Inhalt |
+| :--- | :--- |
+| `app_data/timegoal_region_yearly.parquet` | offizielle Hilfsfrist-Zahlen je LOR-Region und Jahr (mit Bezirk) |
+| `app_data/missions_monthly.parquet` | Monat × Bezirk × Gruppe × Stufe, additive Zähler und Summe der Antwortzeit |
+| `app_data/missions_daily_citywide.parquet` | Stadt/Tag aus Daily_Data |
+| `app_data/turnout_quarterly.parquet` | Ausrückzeiten je Wache und Quartal |
+| `app_data/events.parquet`, `districts.parquet` | Seeds für Event-Marker und Bezirke |
+| `app_data/geo/lor_<ebene>.geojson` | vereinfachte LOR-Polygone (EPSG:4326), 3 Ebenen |
+| `app_data/meta.json` | Datenstand und Exportzeitpunkt |

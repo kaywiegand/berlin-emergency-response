@@ -5,9 +5,9 @@
 
 | Feld | Inhalt |
 | :--- | :--- |
-| Status | S2 dbt-Kern abgeschlossen |
+| Status | S3 Geodaten + App abgeschlossen (Zwischenprüfung offen) |
 | Plan | `docs/PLAN.md` |
-| Nächster Schritt | S3 Geodaten + App: LOR-Polygone (BACKLOG 3), Parquet-Export, Streamlit neu |
+| Nächster Schritt | `/project-case check`, dann S4 Automatisierung |
 
 ---
 
@@ -40,3 +40,12 @@
 - Verifiziert: `dbt build` grün (Tests, Singular-Tests), Freshness pass, Rerun ohne Duplikate, manipulierter Regional-Wert lässt `assert_regional_matches_mission_data` rot werden.
 - Befunde: Regional-Totals weichen von Mission_Data um bis ~0,3 % ab (Toleranz 1 %). Telefonie-Störung betrifft nur Call-Daten, nicht Einsätze (`seed_events`).
 - Nächster Schritt: S3.
+
+### 2026-10-08 — S3 Geodaten + App
+
+- `scripts/fetch_lor.py` (WFS Geoportal Berlin, LOR 2021, CC BY 3.0 DE, vereinfacht), `scripts/export_parquet.py`, `src/app.py` neu auf `app_data/`. Tests: `tests/test_app_data.py` (u. a. AppTest je Kartenebene).
+- Entscheidung: Monatsgrain in der App, damit Parquet klein bleibt (tägliche Bot-Commits in S4). Medianen sind nicht additiv, der Export trägt Summen.
+- Entscheidung: Plotly-Theme als `wgnd` v0.4.0 (lokal committet, Push offen, BACKLOG 13). Dev-Install mit `uv run --no-sync`.
+- Entscheidung: zwei Kennzahlen nebeneinander (offiziell vs. eigene Näherung D/E, ≤ 600 s), Definitionsbruch 2024→2025 sichtbar (Event-Marker aus `seed_events`, Hinweis in der App).
+- Befund: LOR-Flächen decken alle 743 Regionen ab; Näherung sinkt 2018–2023 deutlich (BACKLOG 16).
+- Nächster Schritt: `/project-case check` als Zwischenprüfung, danach S4.
