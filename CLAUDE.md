@@ -48,7 +48,7 @@ docs/                ← PLAN, CONCEPT, DATA_SOURCES, DATA_DICTIONARY
 
 ## Konventionen
 
-- **Differenzierung nach Einsatzart (Pflicht):** Jede Gesamtbetrachtung (Notebook, Mart, App) zeigt zusätzlich die Aufschlüsselung nach Einsatzart (Rettungsdienst, Brandbekämpfung, technische Hilfeleistung). Die Vorgaben unterscheiden sich (RD: 10 min, Brand: 14 Funktionen in 15 min, technische Hilfe: keine Frist gefunden), siehe README "Fristen und Schutzziele". Schwellen gelten je Einsatzart, nie global.
+- **Differenzierung nach Einsatzart (Pflicht):** Jede Gesamtbetrachtung (Notebook, Mart, App) zeigt zusätzlich die Aufschlüsselung nach Einsatzart (Rettungsdienst, Brandbekämpfung, technische Hilfeleistung). Die Vorgaben unterscheiden sich (RD: 10 min, Brand: 14 Funktionen in 15 min, technische Hilfe: keine Frist vereinbart), siehe README "Fristen und Schutzziele". Schwellen gelten je Einsatzart, nie global.
 - Code, Spalten, Kommentare: Englisch. Markdown: Deutsch.
 - dbt-Schichten: `stg_` (view) → `int_` (view) → `fct_`/`dim_` (table/incremental).
 - `profiles.yml` liegt im Repo (nur lokaler DuckDB-Pfad, keine Secrets). Secrets nie dort ablegen.

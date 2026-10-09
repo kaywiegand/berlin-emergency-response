@@ -18,9 +18,9 @@ Die Berliner Feuerwehr arbeitet in drei Einsatzarten, für die **unterschiedlich
 | :--- | :--- | :--- |
 | **Rettungsdienst** | Zwei Einsatzkräfte innerhalb von 10 Minuten (Planungsgröße), Erreichungsgrad 90 % vereinbart | Zeit bis zum Eintreffen des ersten Fahrzeugs |
 | **Brandbekämpfung** | 14 Funktionen innerhalb von 15 Minuten; Erreichungsgrad 90 % in Schutzzielklasse A, 50 % in Klasse B | Zeit bis zum ersten wasserführenden Fahrzeug, zur ersten Drehleiter und bis 14 Einsatzkräfte vor Ort sind |
-| **Technische Hilfeleistung** | keine Frist gefunden | nur Antwortzeit-Statistik, keine Hilfsfrist-Auswertung der Feuerwehr |
+| **Technische Hilfeleistung** | keine Frist und kein Erreichungsgrad vereinbart; die Feuerwehr weist nur die durchschnittlich erreichte Hilfsfrist aus | Antwortzeit-Statistik, ohne Soll |
 
-Quellen: [Senatsantwort 2019](https://pardok.parlament-berlin.de/starweb/adis/citat/VT/19/SchrAnfr/S19-19457.pdf), [Jahresbericht 2022](https://www.berliner-feuerwehr.de/fileadmin/bfw/dokumente/Publikationen/Jahresberichte_infografik/Infografik_Jahresbericht_2022_innen.pdf), [Jahresbericht 2023](https://www.berliner-feuerwehr.de/fileadmin/bfw/dokumente/Publikationen/Jahresberichte_infografik/Infografik_Jahresbericht_2023.pdf), [Open-Data-Seite der Feuerwehr](https://www.berliner-feuerwehr.de/service/open-data/). Den Gesetzestext haben wir nicht geprüft.
+Die Feuerwehr definiert die Hilfsfrist als Zeit vom Beginn der Notrufabfrage in der Leitstelle bis zum Eintreffen der ersten Einsatzkräfte. Quellen: [Berliner Feuerwehr in Zahlen](https://www.berliner-feuerwehr.de/ueber-uns/berliner-feuerwehr-in-zahlen-2024-1/) (Frist, Soll und Ist je Einsatzart), [Senatsantwort 2019](https://pardok.parlament-berlin.de/starweb/adis/citat/VT/19/SchrAnfr/S19-19457.pdf), [Jahresbericht 2022](https://www.berliner-feuerwehr.de/fileadmin/bfw/dokumente/Publikationen/Jahresberichte_infografik/Infografik_Jahresbericht_2022_innen.pdf), [Jahresbericht 2023](https://www.berliner-feuerwehr.de/fileadmin/bfw/dokumente/Publikationen/Jahresberichte_infografik/Infografik_Jahresbericht_2023.pdf), [Open-Data-Seite der Feuerwehr](https://www.berliner-feuerwehr.de/service/open-data/). Den Gesetzestext haben wir nicht geprüft.
 
 **Folgen für das Projekt**
 
