@@ -15,7 +15,7 @@
 | Quelle | Granularität | Rolle |
 | :--- | :--- | :--- |
 | `Mission_Data/*_JJJJ.csv` (2018–2026) | Einsatz, Bezirk (12), Tag, keine Uhrzeit, keine ID | Zeitverlauf |
-| `Regional_Data/JJJJ` | 542 Planungsräume, 143 Bezirksregionen, 60 Prognoseräume, nur Jahr, IDs stabil | Karte, Hilfsfrist-Quote |
+| `Regional_Data/JJJJ` | 542 Planungsräume, 143 Bezirksregionen, 58 Prognoseräume, nur Jahr, IDs stabil | Karte, Hilfsfrist-Quote |
 | `Daily_Data`, `Turnout_Times` (+`current`), `Dispatchcodes` | Stadt/Tag, Wache/Quartal, Code | Trend, Snapshot, Seed |
 | LOR-Polygone (Geoportal Berlin) | 542 + 143 Flächen | Karte; Quelle/Lizenz offen |
 

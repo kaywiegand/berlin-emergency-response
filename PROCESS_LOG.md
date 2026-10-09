@@ -69,7 +69,7 @@
 
 - `notebooks/00_introduction.ipynb`: Facts, Fragestellung mit Dimensionen/Vermutungen/Grenzen, Quellen-Tabelle (Inhalt, Warum, Wichtig), Antwortzeit vs. Hilfsfrist, Medallion, dbt-Komponenten (Wie/Warum), Notebook-Map; Setup-Zelle zeigt Zeilen je Schicht live aus DuckDB. `make notebooks` führt alle Notebooks aus.
 - Befund: Die DuckDB enthielt noch Objekte der in S2 entfernten Modelle (`fct_missions_daily`, `int_missions_daily_enhanced`, `stg_missions_daily`); dbt löscht entfernte Modelle nicht. Manuell gelöscht.
-- Offen: Bedeutung der `mission_count_rd1`–`rd5` und `KV_Data` nicht geprüft, deshalb nicht erklärt.
+- Geklärt in `01_exploration_daily`: `rd1`–`rd5` sind Notfallkategorien (RD1/RD2 laut BF "critical"); `KV_Data` bezieht sich auf die Kassenärztliche Vereinigung (Feldbeschreibung).
 - Nächster Schritt: `01_exploration_missions` (mit `wgnd.inspect`), dann die weiteren Quellen.
 
 ### 2026-10-09 — 01_exploration_missions
@@ -77,3 +77,11 @@
 - Notebook mit Struktur, Missing, Duplikaten, Kategorien, Antwortzeit, Zeit und Fazit (Inhalt, Nutzen, Grenzen, Beobachtungen, offene Fragen). Profil-Funktionen laufen auf fester Stichprobe (Seed 42), Anteile per SQL auf der Gesamtmenge.
 - Befund (Details im Notebook): Antwortzeit fehlt systematisch (nach Einsatztyp und Stufe), die Dispatch-Stufe ist über die Jahre nicht stabil (Codeabdeckung, Stufenmix) — stützt die Vermutung hinter BACKLOG 16. Tippfehler `RTW` mit Backtick in `units_first_type`.
 - Nächster Schritt: `01_exploration_daily` (inklusive Bedeutung von `mission_count_rd1`–`rd5`).
+
+### 2026-10-09 — 01_exploration_daily, _regional, _turnout, _geo
+
+- Vier Notebooks mit Struktur, Profil, Verteilungen, Abgleich und Fazit (Inhalt, Nutzen, Grenzen, Beobachtungen, offene Fragen). Alle mit gespeicherten Outputs, ohne Fehler.
+- Kernbefund Definitionsbruch: `mission_count_ems_critical` entspricht bis 2024 einem breiten Begriff (rund RD1 bis RD4), 2026 nahe RD1 plus RD2; ein zweiter Beleg sind die RTW-Alarmierungen in `Turnout_Times` (Rückgang 2025). Muster zwischen Regionen bleiben stabil (Rangkorrelation hoch), Niveaus nicht vergleichbar.
+- Kernbefund Raum: Quote und Antwortzeit hängen mit Abstand zum Zentrum und Einsatzdichte zusammen (Rangkorrelation rund 0,5). Wachen-Koordinaten fehlen noch (Anreicherung Stufe 2).
+- Kernbefund Daten: sieben Tage fehlen in der Tagesreihe (alle 2026) und erklären deren Abweichung zu den Einzeleinsätzen; die Regionaldatei 2025 ist etwas kleiner als die anderen Quellen; Prognoseräume sind 58 (Plan korrigiert).
+- Nächster Schritt: `02_preparation` (Pipeline im Detail, Entscheidungen aus den Fazits: Backtick, `is_reliable`, `seed_stations`, Geometrie-Merkmale, Lückentest).
