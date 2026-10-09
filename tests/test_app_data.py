@@ -60,7 +60,7 @@ def test_official_kpis_citywide_year():
     assert k["computed"] > 0
 
 
-VIEWS = ["overview", "counts", "arrival_times", "stations", "notes"]
+VIEWS = ["overview", "findings", "counts", "arrival_times", "stations", "notes"]
 
 
 @pytest.mark.parametrize("view", VIEWS)
@@ -91,3 +91,13 @@ def test_events_are_sourced():
     events = _table("events")
     assert events["source"].notna().all() and events["short_label"].notna().all()
     assert {"weather", "organisation", "timegoal_definition"} <= set(events["scope"])
+
+
+def test_insights_file_is_complete():
+    data = json.loads((APP_DATA / "insights.json").read_text(encoding="utf-8"))
+    assert data["insights"]
+    for i in data["insights"]:
+        assert i["mission_type"] in {"all", "ems", "fire", "technical"}
+        assert i["strength"] in {"belegt", "hinweis", "offen"}
+        assert i["evidence"] and i["title"] and i["text"]
+    assert {"ems", "fire", "technical"} <= {i["mission_type"] for i in data["insights"]}

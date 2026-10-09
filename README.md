@@ -27,6 +27,7 @@ Die Feuerwehr definiert die Hilfsfrist als Zeit vom Beginn der Notrufabfrage in 
 - **Gesamtbetrachtungen sind immer nach Einsatzart aufgeschlüsselt.** Eine Zahl über alle Einsätze mischt Vorgaben, die nicht vergleichbar sind. Jede Auswertung zeigt zuerst das Gesamtbild und direkt daneben die Aufteilung in Rettungsdienst, Brandbekämpfung und technische Hilfeleistung, jeweils mit der passenden Frist (oder dem Hinweis, dass es keine gibt).
 - **Die Hilfsfrist-Quote ist nur für den Rettungsdienst und die Brandbekämpfung definiert.** Die offizielle Quote in den Regionaldaten gilt nur für *kritische* Rettungsdiensteinsätze und für Brände.
 - **"Kritisch" ist kein stabiler Begriff:** Seit dem 25.03.2025 klassifiziert die Feuerwehr Rettungsdiensteinsätze in Notfallkategorien (RD1 bis RD5). Die Zahl "kritischer" Einsätze fällt dadurch sprunghaft; Jahresvergleiche der Quote sind nur mit Vorsicht möglich.
+- **Zwei Kennzahlen im Rettungsdienst:** die offizielle Quote (Regionaldaten, ab 2024) und unsere Näherung aus den Einzeleinsätzen (Dispatch-Stufen C/D/E, Schwelle 10 Minuten als Annahme); beide zeigt die App nebeneinander.
 - **Weitere Strukturänderung:** Die Einführung des RTW-B (Basic Life Support) um den Jahreswechsel 2022/23 verschiebt die Hilfsfrist ebenfalls, laut Darstellung der Feuerwehr.
 
 ---

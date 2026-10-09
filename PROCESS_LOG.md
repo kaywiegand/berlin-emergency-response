@@ -102,3 +102,12 @@
 - Offen aus dem Dialog: dbt-Schwelle 600 s gilt für alle Einsatzgruppen (BACKLOG 25).
 - Entscheidung (Kay): Die unterschiedlichen Fristen je Einsatzart gehören in die README; Gesamtbetrachtungen werden immer nach Einsatzart aufgeschlüsselt, die Aufteilung ist Pflicht. Umgesetzt in README ("Fristen und Schutzziele"), CLAUDE.md (Konvention), CONCEPT; Umsetzung in Notebooks/Marts/App steht aus (BACKLOG 24, 25).
 - Beleg (Kay-Recherche, geprüft gegen die BF-Seite "Berliner Feuerwehr in Zahlen"): Brand Frist 15 min (Soll A 90 %, B 50 %), Notfallrettung Frist 10 min (Soll 90 %); **technische Hilfeleistung: nur die durchschnittlich erreichte Hilfsfrist, keine Frist, kein Soll.** Die KI-Zusammenfassungen aus der Recherche (technische Hilfe gleich 15 min, Klasse A 8 min) stehen so nicht auf der BF-Seite und gelten als unbelegt. Dieselbe Seite nennt 18 Rettungswachen auf FF-Standorten; das erklärt RTW-Alarmierungen an `FF`-Standorten in den Turnout-Daten.
+
+### 2026-10-09 — Umsetzung der vier Punkte (Einsatzart, Einsatzcodes, BF-Diagramme, Ereignisse)
+
+- dbt: `is_within_timegoal` je Einsatzgruppe (Var `timegoal_seconds` als Map, derzeit nur `ems`), neue Spalte `mission_count_with_timegoal`, Test `assert_timegoal_only_for_ems`. Seeds: `seed_dispatch_codes` und `seed_dispatch_code_map` aus der BF-Codetabelle (`scripts/fetch_dispatch_codes.py`), `seed_events` mit 6 belegten Ereignissen (Notrufstörung, Notfallkategorien 25.03.2025, RTW-B ab Januar 2023, Stürme).
+- App: Mehrseitig (Übersicht, Befunde, Einsatzzahlen, Eintreffzeiten, Wachen, Fristen und Methodik), die BF-Diagramme nachgebaut und nach Einsatzart getrennt; Schwelle kommt aus der dbt-Var (`meta.json`), Standard-Stufen C/D/E.
+- Notebooks: `01_exploration_*` und `00_introduction` nach Einsatzart aufgeschlüsselt; `04_insights` baut die BF-Diagramme nach und schreibt `app_data/insights.json` (Seite "Befunde"). Neue Befunde: Notfallkategorien-Stichtag belegt, C/D/E näher an RD1+RD2 als D/E, Abstand zur Wache erklärt Rettungsdienst-Quote, Brand-Quote kaum.
+- Reproduktionscheck: Unsere Monatskurven treffen die BF-Diagramme (z. B. Hilfsfrist Rettungsdienst Januar 2018 und Juni 2025).
+- Abweichung: Technische Hilfe in unseren Daten 13 bis 15 Minuten, BF-Zahlenseite nennt 9,92 (BACKLOG 29).
+- Nächster Schritt: `02_preparation`, dann `03_analysis_*` (Zeit, Raum, Einsatzart, Sonderereignisse).

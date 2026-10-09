@@ -1,0 +1,145 @@
+{
+  "generated_for_data_through": "2026-10-07",
+  "insights": [
+    {
+      "id": "counts",
+      "mission_type": "all",
+      "title": "Einsatzzahlen steigen in allen drei Einsatzarten",
+      "text": "Von 2019 bis 2024: Rettungsdienst 11 %, Brandbekämpfung 30 %, technische Hilfeleistung 6 %.",
+      "strength": "belegt",
+      "evidence": [
+        "01_exploration_daily: Volumes",
+        "BF Open Data: Anstieg der Einsatzzahlen über die Jahre"
+      ],
+      "caveat": ""
+    },
+    {
+      "id": "approximation",
+      "mission_type": "ems",
+      "title": "Die Näherung für \"kritisch\" in den Einzeleinsätzen: Stufen C/D/E",
+      "text": "Gegenüber der offiziellen Menge RD1+RD2 erfasst die Stufe D/E nur rund die Hälfte (Abweichung -54 bis -43 %), die Stufen C/D/E überschätzen sie um 8 bis 24 %. Die App nutzt C/D/E als Standard.",
+      "strength": "hinweis",
+      "evidence": [
+        "01_exploration_daily: Approximating RD1+RD2 from the Missions"
+      ],
+      "caveat": "Näherung, keine Rekonstruktion der Notfallkategorie; Schwelle 600 s ist eine Annahme."
+    },
+    {
+      "id": "definition",
+      "mission_type": "ems",
+      "title": "Seit dem 25.03.2025 ist \"kritisch\" enger gefasst; RD1+RD2 ist die vergleichbare Gruppe",
+      "text": "Der Anteil kritischer Einsätze an allen Rettungsdiensteinsätzen fällt von 96 % auf 56 %. RD1 plus RD2 bleibt bei 56 % bzw. 54 % und ist die über die Zeit vergleichbare Gruppe.",
+      "strength": "belegt",
+      "evidence": [
+        "01_exploration_daily: The Break on 25 March 2025",
+        "BF Open Data: Rettungsdiensteinsätze nach Notfallkategorie"
+      ],
+      "caveat": ""
+    },
+    {
+      "id": "districts",
+      "mission_type": "ems",
+      "title": "Räumliches Muster: Innenstadtbezirke günstiger, östliche Randbezirke ungünstiger",
+      "text": "Die offizielle Quote ist 2026 in Friedrichshain-Kreuzberg am höchsten (82 %) und in Marzahn-Hellersdorf am niedrigsten (57 %). Die Rangfolge der Regionen bleibt zwischen den Jahren stabil, obwohl sich das Niveau verschiebt.",
+      "strength": "belegt",
+      "evidence": [
+        "01_exploration_regional: By District, Stability of the Pattern"
+      ],
+      "caveat": "Die Niveaus verschiedener Jahre sind wegen der Definitionsänderung nicht vergleichbar."
+    },
+    {
+      "id": "ems_breaks",
+      "mission_type": "ems",
+      "title": "Zwei Strukturänderungen verschieben die Hilfsfrist des Rettungsdienstes",
+      "text": "Die mittlere Hilfsfrist kritischer Einsätze ändert sich nach dem Beginn des RTW-B (Januar 2023) um -0,7 Minuten und nach der Einführung der Notfallkategorien (25.03.2025) um -1,0 Minuten (Mittel von je sechs Monaten). Sprünge an diesen Stellen sind nicht allein Leistungsänderungen.",
+      "strength": "belegt",
+      "evidence": [
+        "01_exploration_daily: The Break on 25 March 2025",
+        "BF Open Data: Eintreffzeiten in der Notfallrettung (Annotationen)"
+      ],
+      "caveat": "Genauer Starttermin des RTW-B nicht belegt; Januar 2023 laut Gesetzesänderung und BF-Darstellung."
+    },
+    {
+      "id": "ems_quote",
+      "mission_type": "ems",
+      "title": "Das Soll von 90 % wird im Rettungsdienst in keinem Jahr erreicht; der Anstieg der Quote ist nicht vergleichbar",
+      "text": "Offizielle Quote kritischer Einsätze: 47 % (2024), 60 % (2025), 68 % (2026) gegenüber dem Soll von 90 %. Der Anstieg fällt mit der Einführung der Notfallkategorien zusammen (der Kreis kritischer Einsätze wird enger) und ist kein Beleg für schnellere Einsätze.",
+      "strength": "belegt",
+      "evidence": [
+        "01_exploration_regional: City-wide",
+        "01_exploration_daily: The Break on 25 March 2025"
+      ],
+      "caveat": "Jahre sind nur eingeschränkt vergleichbar; 2025 enthält beide Definitionen."
+    },
+    {
+      "id": "space_ems",
+      "mission_type": "ems",
+      "title": "Rettungsdienst: Je näher eine Rettungswache, desto höher die Quote",
+      "text": "Rangkorrelation der Quote mit dem Abstand zur nächsten Rettungswache -0,70 und mit dem Abstand zum Zentrum -0,49 (Planungsräume 2025). Im Mittel liegt die Quote in Regionen bis 1 km Abstand bei 70 % und in Regionen über 3 km bei 40 %.",
+      "strength": "hinweis",
+      "evidence": [
+        "01_exploration_stations: Distance to the Nearest Station"
+      ],
+      "caveat": "Zusammenhang auf Regionsebene, keine Ursache; Abstand ist Luftlinie zum Flächenschwerpunkt; Wachen-Stand 2024."
+    },
+    {
+      "id": "turnout",
+      "mission_type": "ems",
+      "title": "Ausrückzeit der Rettungswagen: Berufsfeuerwehr schneller als Rettungswachen und Freiwillige",
+      "text": "Mittlere Ausrückzeit seit 2025: Berufsfeuerwehr 78 s, Rettungswachen 85 s, Standorte der Freiwilligen Feuerwehr 98 s. Sie macht grob ein Siebtel der Antwortzeit aus.",
+      "strength": "hinweis",
+      "evidence": [
+        "01_exploration_turnout",
+        "01_exploration_stations: RTW Turnout by Type and District"
+      ],
+      "caveat": "Nur dringliche Einsätze mit Ausrücken; Anteil an der Antwortzeit ist eine Größenordnung."
+    },
+    {
+      "id": "fire",
+      "mission_type": "fire",
+      "title": "Brandbekämpfung: Frist im Mittel eingehalten, Quote stabil",
+      "text": "Die mittlere Zeit bis 14 Einsatzkräfte liegt 2025 bei 12,8 Minuten (Frist 15). Die offizielle Quote beträgt 80 % (2024), 83 % (2025), 84 % (2026); das Soll liegt bei 90 % (Klasse A) bzw. 50 % (Klasse B).",
+      "strength": "belegt",
+      "evidence": [
+        "01_exploration_regional: By Mission Type",
+        "BF Open Data: Eintreffzeiten in der Brandbekämpfung"
+      ],
+      "caveat": "Die Quote der Regionaldaten fasst die Klassen A und B zusammen; getrennte Erreichungsgrade veröffentlicht die BF auf ihrer Zahlen-Seite."
+    },
+    {
+      "id": "space_fire",
+      "mission_type": "fire",
+      "title": "Brandbekämpfung: Der Abstand zu Rettungswachen erklärt die Quote kaum",
+      "text": "Rangkorrelation der Brand-Quote mit dem Abstand zur nächsten Rettungswache -0,30, mit dem Abstand zum Zentrum -0,50. Für Löschfahrzeuge zählen andere Standorte als für Rettungswagen.",
+      "strength": "hinweis",
+      "evidence": [
+        "01_exploration_stations: Distance to the Nearest Station"
+      ],
+      "caveat": "Die Standortliste unterscheidet nicht nach Löschfahrzeugen."
+    },
+    {
+      "id": "storms",
+      "mission_type": "technical",
+      "title": "Stürme erzeugen die Spitzen der technischen Hilfeleistung",
+      "text": "An den Sturmtagen (Klaus 2019, Ylenia und Zeynep 2022, Ziros 2025) steigt die Zahl der technischen Hilfeleistungen auf das 14- bis 33-fache eines üblichen Tages.",
+      "strength": "belegt",
+      "evidence": [
+        "01_exploration_daily: Special Days",
+        "BF Open Data: Einsatzzahlen (Annotationen)"
+      ],
+      "caveat": "Ein zweiter Spitzentag am 26.06.2025 ist nicht erklärt."
+    },
+    {
+      "id": "technical",
+      "mission_type": "technical",
+      "title": "Technische Hilfe: keine Frist; Abweichung zur BF-Zahlenseite offen",
+      "text": "Für technische Hilfeleistung ist keine Frist vereinbart. Die Tagesreihe ergibt 2025 eine mittlere Zeit von 14,6 Minuten; die BF nennt auf ihrer Zahlen-Seite 9,92 Minuten als durchschnittlich erreichte Hilfsfrist. Der Unterschied ist nicht geklärt.",
+      "strength": "offen",
+      "evidence": [
+        "01_exploration_daily: Response Time Statistics",
+        "BF: Berliner Feuerwehr in Zahlen"
+      ],
+      "caveat": "Definition der BF-Zahl (Teilmenge, andere Zeit) unbekannt; BACKLOG 29."
+    }
+  ]
+}
