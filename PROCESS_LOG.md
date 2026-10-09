@@ -5,9 +5,9 @@
 
 | Feld | Inhalt |
 | :--- | :--- |
-| Status | S3 Geodaten + App abgeschlossen (Zwischenprüfung offen) |
+| Status | S3 abgeschlossen, S3b (Fragestellung + Notebooks) beginnt |
 | Plan | `docs/PLAN.md` |
-| Nächster Schritt | `/project-case check`, dann S4 Automatisierung |
+| Nächster Schritt | `00_introduction` schreiben, dann `01_exploration_<quelle>` |
 
 ---
 
@@ -56,3 +56,11 @@
 - Zusätzlich `02_preparation`, `03_analysis`, `04_insights` (Platzhalter mit Standard-Header). Die alten Notebooks `01_exploration`, `02_analysis`, `03_visualization` (Altstand, nicht mehr lauffähig) gelöscht (Kay-Freigabe).
 - Anpassung: Paket installierbar (`[tool.uv] package = true`), Docstrings auf Englisch, `PATHS` um `db`, `app_data`, `dbt_models` erweitert, ML-Konstanten entfernt.
 - `wgnd` v0.4.0 nach GitHub gepusht (Kay-Freigabe), `uv.lock` auf den Git-Stand aktualisiert; `uv sync` + 17 Tests grün mit der Git-Version (BACKLOG 13 erledigt).
+
+### 2026-10-09 — Neuausrichtung: Notebooks vor App (S3b)
+
+- Entscheidung (Kay): Notebooks sind die Basisarbeit, die App zeigt nur das Ergebnis von `04_insights`. Mein Plan hatte die App in S3 vor der Analyse gebaut; die Ursachen-Fragen (BACKLOG 1, 2, 16) gehören in die Notebooks.
+- Neue Leitfrage: Faktoren, die mit der Antwortzeit zusammenhängen, und wo/wann die Hilfsfrist verfehlt wird; Zusammenhänge statt Ursachen (`docs/CONCEPT.md` Abschnitt 7).
+- Notebook-Plan: `00_introduction`, `01_exploration_<quelle>`, `02_preparation`, `03_analysis_<dimension>`, `04_insights` → `app_data/insights.json`. Medallion: raw = Bronze, stg/int = Silver, fct/dim = Gold.
+- Anreicherung Stufe 1 (Feiertage/Ferien, Wetter) nach dem ersten EDA-Durchlauf; Stufe 2 später. Politik nur als belegte Annotation.
+- Alte Notebooks gelöscht. `BACKLOG.md` neu geschrieben, weil ein Regex-Ersetzen früher Zeilen verschmolzen hatte; Inhalt unverändert bis auf Zahlen-Bereinigung (Review-Finding).

@@ -29,9 +29,10 @@ Upstream hat keinen Tagesendpunkt: täglich wird die Datei des laufenden Jahres 
 | **S1 Ingestion** | `scripts/ingest.py` ersetzt Fake-Skript: `--full` und Daily-Modus, idempotent, harter Fehler statt Fallback, Spaltenprüfung, Fixture |
 | **S2 dbt-Kern** | Sources + Freshness, Seeds, Staging, Macros, Intermediate, Marts (incremental), Tests |
 | **S3 Geodaten + App** | LOR-Polygone, Parquet-Export, Streamlit auf Parquet, Choropleth mit Jahres-Slider, KPI-Zeile, Event-Marker, Plotly-Theme aus `wgnd`-Palette; `/project-case check` als Zwischenprüfung |
+| **S3b Fragestellung + Notebooks** | Notebooks sind die Basisarbeit, die App zeigt nur das Ergebnis. `00_introduction` (Fragestellung, Quellen, dbt-Architektur), `01_exploration_<quelle>` je Quelle mit `wgnd.inspect` + Fazit, `02_preparation` (Pipeline im Detail, Medallion), `03_analysis_<dimension>` (Zeit, Geo, Einsatzart, Sonderereignisse), `04_insights` (belegte Aussagen, Empfehlungen, neue Charts) → `app_data/insights.json` → App-Seite "Befunde". Danach Anreicherung Stufe 1 (Feiertage/Ferien, Wetter) mit Ingestion, dbt-Source und Notebooks `01_exploration_weather`/`_holidays`, `03_analysis_weather`. `make notebooks` führt alle aus |
 | **S4 Automatisierung** | `daily.yml` (Cron, Cache, Freshness, Build, Export, Bot-Commit), `pr.yml`, Persistenz der Snapshot-Historie |
 | **S5 dbt-Vollständigkeit + Governance** | Snapshots, Docs, Exposures, Selectors, Contracts, Access/Groups, Versions, Meta, Qualitätsbericht |
-| **S6 Konsistenz + Case** | Notebooks 00–06 nach `CONVENTIONS.md` mit `wgnd` (inspect, viz); `/project-review` (nach S5), `/project-case` story → slides; `public/`-Hub mit Link zur Live-App |
+| **S6 Konsistenz + Case** | Notebook-Konsistenz nach `CONVENTIONS.md`; `/project-review` (nach S5), `/project-case` story → slides; `public/`-Hub mit Link zur Live-App; Streamlit-Deployment-Link |
 
 ## Komponente → Schritt
 
@@ -64,9 +65,11 @@ Upstream hat keinen Tagesendpunkt: täglich wird die Datei des laufenden Jahres 
 - Version: `fct_timegoal_region_yearly` v1 → v2 (z. B. zusätzliche Spalte), `latest_version` und Deprecation dokumentiert.
 - Qualitätsbericht (Markdown, aus `run_results.json` erzeugt): Tests je Schicht, Datenlücken (Telefonie-Ausfall 2024/25, leere `response_time`, Korrekturen in Vorjahren).
 
-## Phase 2 (außerhalb)
+## Anreicherung
 
-Wetter (Open-Meteo/DWD), Einwohner je Planungsraum, Wachen-Koordinaten, Turnout-Vergleich, KV-/Call-Data, Politik als belegte Annotation.
+- **Stufe 1 (S3b):** Feiertage/Ferien, Wetter (Open-Meteo, täglich, Berlin).
+- **Stufe 2 (später):** Einwohner je Planungsraum, Wachen-Koordinaten, Turnout-Vergleich, KV-/Call-Data.
+- Politik nur als belegte Annotation (`seed_events`), keine Kausalaussage.
 
 ## Offene Verifikationen (im jeweiligen Schritt)
 

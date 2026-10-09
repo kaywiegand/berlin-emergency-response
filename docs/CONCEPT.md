@@ -18,6 +18,8 @@ Wie schnell ist der Rettungsdienst bei kritischen Notfällen tatsächlich vor Or
 in welchen Bezirken wird die Hilfsfrist verfehlt, und wie verschiebt sich das
 über die Jahre[cite: 1]?
 
+> Erweitert 2026-10-09, siehe Abschnitt 7.
+
 **Abgrenzung — was dieses Projekt nicht ist**
 Keine Bewertung der Einsatzkräfte[cite: 1]. Antwortzeiten hängen an Standortdichte,
 Verkehr, Bebauung und Einsatzaufkommen, nicht an der Leistung einzelner Teams[cite: 1].
@@ -117,3 +119,13 @@ Dashboard (Evidence.dev)  ──►  GitHub Pages
 Wetter, Einwohner je Planungsraum, Wachen-Koordinaten, Turnout-Vergleich, KV-/Call-Data.
 
 **Bekannte Altlasten in diesem Dokument:** `[cite: n]`-Marker und die Evidence.dev-Nennungen in Abschnitt 3 sind Überbleibsel (BACKLOG 5).
+
+
+**Leitfrage (gilt ab 2026-10-09)**
+Welche Faktoren hängen mit der Antwortzeit des Berliner Rettungsdienstes zusammen
+(Zeit, Ort, Einsatzart und Dringlichkeit, Sondersituationen, gegebenenfalls Wetter),
+und wo und wann wird die Hilfsfrist verfehlt? Gezeigt werden Zusammenhänge, keine Ursachen.
+Grenzen der Daten: keine Uhrzeit, keine Einsatzkoordinaten (nur Bezirk), Regionen nur als Jahresaggregat ab 2024.
+
+**Arbeitsweise:** Notebooks (`00`–`04`) sind die Basisarbeit, die App zeigt nur geprüfte Ergebnisse aus `04_insights`.
+**Medallion:** Bronze = `raw_*`, Silver = `stg_*`/`int_*`, Gold = `fct_*`/`dim_*`.

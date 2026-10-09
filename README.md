@@ -1,8 +1,8 @@
 # Berlin Emergency Response
 
-Wie schnell ist der Berliner Rettungsdienst bei kritischen Notfällen vor Ort, in welchen Regionen wird die Hilfsfrist verfehlt, und wie verschiebt sich das über die Jahre?
+Welche Faktoren hängen mit der Antwortzeit des Berliner Rettungsdienstes zusammen, und wo und wann wird die Hilfsfrist verfehlt? Die Open Data der Berliner Feuerwehr werden dafür mit weiteren Daten angereichert. Gezeigt werden Zusammenhänge, keine Ursachen.
 
-Das Projekt baut dafür eine vollständige Analytics-Engineering-Pipeline auf den Open Data der Berliner Feuerwehr: Ingestion, dbt-Transformation auf DuckDB, Streamlit-Dashboard mit Karte, tägliche Automatisierung über GitHub Actions. Es dient zugleich als Portfolio-Case und als Praxisprojekt zur dbt Analytics Engineering Certification.
+Die Notebooks (`notebooks/00`–`04`) sind die Analysearbeit, die App zeigt die geprüften Ergebnisse. Dahinter liegt eine vollständige Analytics-Engineering-Pipeline auf den Open Data der Berliner Feuerwehr: Ingestion, dbt-Transformation auf DuckDB, Streamlit-Dashboard mit Karte, tägliche Automatisierung über GitHub Actions. Es dient zugleich als Portfolio-Case und als Praxisprojekt zur dbt Analytics Engineering Certification.
 
 **Abgrenzung:** keine Bewertung von Einsatzkräften. Antwortzeiten hängen an Standortdichte, Verkehr, Bebauung und Einsatzaufkommen. Das Projekt beschreibt Struktur, nicht Verschulden.
 
