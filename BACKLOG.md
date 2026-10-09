@@ -28,5 +28,4 @@ Prio: `1` = hoch · `2` = mittel · `3` = niedrig
 | 24 | Grundsatz "Gesamt immer nach Einsatzart aufgeschlüsselt": umgesetzt in dbt-Schwelle, App, `01_exploration_*` und `04_insights`; ausstehend in `02_preparation` und `03_analysis_*` (beim Schreiben beachten); für technische Hilfe Frist bei BF erfragen oder als nicht vereinbart bestätigen | 1 | S3b |
 | 26 | Einsatzcode-Tabelle ist als Seed da (`seed_dispatch_codes`, `seed_dispatch_code_map`); offen: Mapping nur als Prior je Kategorie und Stufe nutzbar (Einzeleinsätze tragen nur 3 von 5 Zeichen), Tabelle ändert sich (Stand 21.05.2026) — Versionierung/Aktualisierung klären | 2 | S3b |
 | 29 | Technische Hilfe: Tagesreihe und Einzeleinsätze ergeben rund 13 bis 15 Minuten, die BF-Seite "in Zahlen" nennt 9,92 min als durchschnittlich erreichte Hilfsfrist — Definition klären (Teilmenge? andere Zeit?), bis dahin als offene Abweichung ausweisen | 2 | S3b |
-
 | 30 | `01_exploration_geo`/`_stations` rechnen Abstände mit eigenem Code; auf `berlin_emergency_response.spatial` umstellen (Reuse, wie `04_insights`) | 3 | S3b |
