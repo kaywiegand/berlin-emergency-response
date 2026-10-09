@@ -81,7 +81,14 @@ models:
             combination_of_columns: [station_id, period]
     columns:
       - name: station_id
-        data_tests: [not_null]
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('seed_stations')
+                field: station_id
+              config:
+                severity: warn
       - name: period_type
         data_tests:
           - accepted_values:

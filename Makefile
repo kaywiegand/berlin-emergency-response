@@ -1,7 +1,7 @@
 # Makefile – berlin-emergency-response
 # Verwendung: make <target>   (Voraussetzung: uv)
 
-.PHONY: setup ingest ingest-full geo export notebooks test dbt-deps dbt-parse dbt-build app clean help
+.PHONY: setup ingest ingest-full geo stations export notebooks test dbt-deps dbt-parse dbt-build app clean help
 
 setup: ## Umgebung + Dependencies installieren
 	uv sync
@@ -15,6 +15,9 @@ ingest-full: ## Alle Jahre laden (rund 650 MB Download)
 
 geo: ## LOR-Polygone vom Geoportal laden und vereinfachen
 	uv run python scripts/fetch_lor.py --refresh
+
+stations: ## Feuerwehr-Standorte und Einsatzbereiche vom Geoportal laden (Seed + GeoJSON)
+	uv run python scripts/fetch_stations.py
 
 export: ## Marts nach app_data/*.parquet exportieren
 	uv run python scripts/export_parquet.py

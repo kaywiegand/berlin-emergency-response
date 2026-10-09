@@ -20,3 +20,33 @@ seeds:
         data_tests: [not_null]
       - name: source
         data_tests: [not_null]
+  - name: seed_stations
+    description: >
+      Fire station sites (Berufsfeuerwehr BF, Freiwillige Feuerwehr FF, Rettungswache RW) with coordinates and operational area
+      from the Geoportal Berlin WFS (BF, dl-de-zero-2.0), source date in `source_date`. `station_id` equals `wache_nummer` in the turnout times.
+    columns:
+      - name: station_id
+        data_tests: [unique, not_null]
+      - name: station_type
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [BF, FF, RW]
+      - name: district_name
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('seed_districts')
+                field: district_name
+      - name: lon
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 13.0
+                max_value: 13.8
+      - name: lat
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 52.3
+                max_value: 52.7

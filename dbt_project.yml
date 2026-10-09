@@ -36,3 +36,8 @@ seeds:
     seed_dispatch_codes:
       +column_types:
         dispatchcode: varchar
+    seed_stations:
+      +column_types:
+        station_id: varchar
+        volunteer_id: varchar
+        postcode: varchar
