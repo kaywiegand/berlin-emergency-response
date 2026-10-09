@@ -2,7 +2,7 @@
 
 Source:  Amt für Statistik Berlin-Brandenburg / Statistische Einheiten im INSPIRE-Datenmodell
          (Lebensweltlich Orientierte Räume 01.01.2021), licence CC BY 3.0 DE.
-Output:  app_data/geo/lor_<level>.geojson (EPSG:4326), properties: region_id, region_name.
+Output:  public/app/data/geo/lor_<level>.geojson (EPSG:4326), properties: region_id, region_name.
 """
 
 from __future__ import annotations
@@ -69,7 +69,7 @@ def build(raw: dict, tolerance: float) -> dict[str, dict]:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("--out-dir", default=str(BASE_DIR / "app_data" / "geo"))
+    parser.add_argument("--out-dir", default=str(BASE_DIR / "public" / "app" / "data" / "geo"))
     parser.add_argument("--raw-file", default=str(BASE_DIR / "data" / "raw" / "geo" / "lor_wfs.json"))
     parser.add_argument("--tolerance", type=float, default=0.00002, help="simplification in degrees")
     parser.add_argument("--refresh", action="store_true", help="download again even if raw file exists")

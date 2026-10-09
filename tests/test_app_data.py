@@ -1,4 +1,4 @@
-"""Checks on the committed app_data/ files: export schema, geo coverage, metrics, app smoke test."""
+"""Checks on the committed public/app/data/ files: export schema, geo coverage, metrics, app smoke test."""
 
 import json
 import pathlib
@@ -8,10 +8,10 @@ import pandas as pd
 import pytest
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-APP_DATA = ROOT / "app_data"
-sys.path.insert(0, str(ROOT / "src"))
+APP_DATA = ROOT / "public" / "app" / "data"
+sys.path.insert(0, str(ROOT / "src" / "app"))
 
-pytestmark = pytest.mark.skipif(not (APP_DATA / "meta.json").exists(), reason="app_data not exported")
+pytestmark = pytest.mark.skipif(not (APP_DATA / "meta.json").exists(), reason="app data not exported")
 
 EXPECTED_REGIONS = {"planning_room": 542, "district_area": 143, "prediction_area": 58}
 
@@ -67,7 +67,7 @@ VIEWS = ["overview", "findings", "counts", "arrival_times", "stations", "notes"]
 def test_every_page_renders(view):
     from streamlit.testing.v1 import AppTest
 
-    at = AppTest.from_file(str(ROOT / "src" / "views" / f"{view}.py"), default_timeout=90).run()
+    at = AppTest.from_file(str(ROOT / "src" / "app" / "views" / f"{view}.py"), default_timeout=90).run()
     assert not at.exception, [e.value for e in at.exception]
 
 
@@ -76,7 +76,7 @@ def test_every_page_renders(view):
 def test_overview_renders_for_every_level_and_metric(level_label, metric):
     from streamlit.testing.v1 import AppTest
 
-    at = AppTest.from_file(str(ROOT / "src" / "views" / "overview.py"), default_timeout=90).run()
+    at = AppTest.from_file(str(ROOT / "src" / "app" / "views" / "overview.py"), default_timeout=90).run()
     at.radio[0].set_value(level_label)
     at.selectbox[0].set_value(metric).run()
     assert not at.exception, [e.value for e in at.exception]

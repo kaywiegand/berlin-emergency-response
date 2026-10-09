@@ -1,4 +1,4 @@
-"""Export dbt marts to app_data/*.parquet: the only data the Streamlit app reads.
+"""Export dbt marts to public/app/data/*.parquet: the only data the Streamlit app reads.
 
 Monthly grain for missions keeps the committed files small (the daily bot commit in CI
 rewrites them); only additive counts are exported at that grain.
@@ -15,7 +15,7 @@ import duckdb
 
 BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
 DEFAULT_DB = BASE_DIR / "data" / "berlin_emergency.duckdb"
-DEFAULT_OUT = BASE_DIR / "app_data"
+DEFAULT_OUT = BASE_DIR / "public" / "app" / "data"
 
 EXPORTS = {
     "districts": "select district_code, district_name, district_short from dim_district order by 1",
@@ -66,7 +66,7 @@ def dbt_timegoal_seconds() -> dict:
     """Thresholds per mission group, read from the dbt var so the app never hard-codes them."""
     import yaml
 
-    project = yaml.safe_load((BASE_DIR / "dbt_project.yml").read_text(encoding="utf-8"))
+    project = yaml.safe_load((BASE_DIR / "dbt" / "dbt_project.yml").read_text(encoding="utf-8"))
     return project["vars"]["timegoal_seconds"]
 
 

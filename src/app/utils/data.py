@@ -1,4 +1,4 @@
-"""Cached loaders for the files in app_data/ (the app never touches DuckDB)."""
+"""Cached loaders for the files in public/app/data/ (the app never touches DuckDB)."""
 
 from __future__ import annotations
 
@@ -8,7 +8,7 @@ import pathlib
 import pandas as pd
 import streamlit as st
 
-APP_DATA = pathlib.Path(__file__).resolve().parents[2] / "app_data"
+APP_DATA = pathlib.Path(__file__).resolve().parents[3] / "public" / "app" / "data"
 
 
 @st.cache_data(show_spinner=False)

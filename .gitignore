@@ -1,7 +1,7 @@
 # .gitignore – dbt + DuckDB + Streamlit (uv)
 # uv.lock gehört in Git. dbt-Modelle, Seeds und profiles.yml (nur DuckDB-Pfad, keine Secrets) ebenfalls.
 
-# ── Daten (nur unter data/, damit seeds/*.csv versioniert werden) ──────────
+# ── Daten (nur unter data/, damit dbt/seeds/*.csv versioniert werden) ──────────
 data/raw/
 data/interim/
 data/processed/

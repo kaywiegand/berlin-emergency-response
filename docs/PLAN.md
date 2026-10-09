@@ -3,6 +3,8 @@
 > Doppelziel: Portfolio-Case (Analytics Engineering) und dbt-Zertifizierungsvorbereitung mit allen Komponenten.
 > Ausgabe: Streamlit + Plotly. Stand 2026-10-08. S0 startet in einer neuen Session.
 
+> **Struktur seit 2026-10-09:** dbt liegt in `dbt/`, der App-Code in `src/app/`, die Daten der Live-App in `public/app/data/`. Pfade in den Schritten unten sind historisch (`models/` = `dbt/models/` usw.).
+
 ## Ausgangslage
 
 - DB und Dashboard laufen auf **30 erfundenen Tagen** (Fallback in `scripts/ingest_raw_data.py`).

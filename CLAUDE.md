@@ -31,16 +31,14 @@
 ## Struktur
 
 ```
-data/raw/            ← Rohdaten, schreibgeschützt (ignoriert)
-data/*.duckdb        ← Warehouse (ignoriert)
-models/              ← dbt: staging → intermediate → marts
-seeds/ macros/ snapshots/ tests/   ← dbt
-scripts/             ← Ingestion
-src/app.py, src/utils/ ← Streamlit-App (liest nur app_data/)
-src/berlin_emergency_response/ ← Projektpaket für Notebooks (config, settings, notebook)
-app_data/            ← Parquet-Export + geo/ (versioniert, von der App gelesen)
-notebooks/           ← nach CONVENTIONS.md
-public/              ← Web-Root (Pages), Quelle public/md/slides.yaml
+dbt/                 ← Data Engineering: dbt-Projekt (models, macros, seeds, tests, profiles.yml)
+scripts/             ← Ingestion, Abrufe (LOR, Wachen, Codes), Parquet-Export
+notebooks/           ← Analysis + Science, nummeriert (CONVENTIONS.md)
+src/berlin_emergency_response/ ← Python-Paket (config, settings, notebook, spatial)
+src/app/             ← Streamlit-App-Code (liest nur public/app/data/)
+public/              ← Web-Root (Pages); public/app/data/ = alle Daten der Live-App; Quelle public/md/slides.yaml
+data/raw/, data/*.duckdb, data/models/ ← Rohdaten, Warehouse, später ML-Modelle (ignoriert)
+tests/               ← pytest (Python); dbt-Tests liegen in dbt/tests/ und dbt/models/**/schema.yml
 docs/                ← PLAN, CONCEPT, DATA_SOURCES, DATA_DICTIONARY
 ```
 
@@ -51,7 +49,7 @@ docs/                ← PLAN, CONCEPT, DATA_SOURCES, DATA_DICTIONARY
 - **Differenzierung nach Einsatzart (Pflicht):** Jede Gesamtbetrachtung (Notebook, Mart, App) zeigt zusätzlich die Aufschlüsselung nach Einsatzart (Rettungsdienst, Brandbekämpfung, technische Hilfeleistung). Die Vorgaben unterscheiden sich (RD: 10 min, Brand: 14 Funktionen in 15 min, technische Hilfe: keine Frist vereinbart), siehe README "Fristen und Schutzziele". Schwellen gelten je Einsatzart, nie global.
 - Code, Spalten, Kommentare: Englisch. Markdown: Deutsch.
 - dbt-Schichten: `stg_` (view) → `int_` (view) → `fct_`/`dim_` (table/incremental).
-- `profiles.yml` liegt im Repo (nur lokaler DuckDB-Pfad, keine Secrets). Secrets nie dort ablegen.
+- dbt-Befehle immer über `make` (setzt `DBT_PROJECT_DIR=dbt`, `DBT_PROFILES_DIR=dbt`); `dbt/profiles.yml` liegt im Repo (nur lokaler DuckDB-Pfad, keine Secrets). Secrets nie dort ablegen.
 - `wgnd` kommt per Git-URL aus `wgnd-toolkit` (Dependency, kein lokaler Fork).
 - Hypothesen als "Vermutung" markieren (siehe offene Verifikationen in `docs/PLAN.md`).
 
@@ -63,7 +61,7 @@ docs/                ← PLAN, CONCEPT, DATA_SOURCES, DATA_DICTIONARY
 make setup      # uv sync + dbt deps
 make dbt-build  # dbt build
 make dbt-parse  # Syntaxcheck
-make export     # Marts -> app_data/*.parquet
+make export     # Marts -> public/app/data/*.parquet
 make geo        # LOR-Polygone (selten nötig)
 make stations   # Wachen-Standorte und Einsatzbereiche (selten nötig)
 make app        # Streamlit

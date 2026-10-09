@@ -2,8 +2,8 @@
 
 Source:  Berliner Feuerwehr, "Feuerwehr Standorte und Einsatzbereiche" (Geoportal Berlin, WFS `feuerwehr`),
          licence dl-de-zero-2.0 (no attribution required).
-Output:  seeds/seed_stations.csv                      one row per site (BF, FF, RW), WGS84 coordinates
-         app_data/geo/fire_operational_areas.geojson  the six operational areas (Einsatzbereiche)
+Output:  dbt/seeds/seed_stations.csv                     one row per site (BF, FF, RW), WGS84 coordinates
+         public/app/data/geo/fire_operational_areas.geojson  the six operational areas (Einsatzbereiche)
 The sites carry a `source_date` (Stand); the dataset changes rarely, so this is a one-off script like fetch_lor.py.
 """
 
@@ -57,8 +57,8 @@ def to_rows(sites: dict) -> list[dict]:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("--seed", default=str(BASE_DIR / "seeds" / "seed_stations.csv"))
-    parser.add_argument("--areas", default=str(BASE_DIR / "app_data" / "geo" / "fire_operational_areas.geojson"))
+    parser.add_argument("--seed", default=str(BASE_DIR / "dbt" / "seeds" / "seed_stations.csv"))
+    parser.add_argument("--areas", default=str(BASE_DIR / "public" / "app" / "data" / "geo" / "fire_operational_areas.geojson"))
     args = parser.parse_args()
 
     rows = to_rows(fetch(LAYERS["sites"]))

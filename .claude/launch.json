@@ -4,7 +4,7 @@
     {
       "name": "streamlit-app",
       "runtimeExecutable": "uv",
-      "runtimeArgs": ["run", "--no-sync", "streamlit", "run", "src/app.py", "--server.headless", "true", "--server.port", "8502", "--browser.gatherUsageStats", "false"],
+      "runtimeArgs": ["run", "--no-sync", "streamlit", "run", "src/app/app.py", "--server.headless", "true", "--server.port", "8502", "--browser.gatherUsageStats", "false"],
       "port": 8502
     }
   ]

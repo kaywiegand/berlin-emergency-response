@@ -38,7 +38,7 @@ def nearest_km(points: pd.DataFrame, sites: pd.DataFrame) -> np.ndarray:
 def planning_room_distances(stations: pd.DataFrame) -> pd.DataFrame:
     """Per planning room: distance to the centre and to the nearest station of three station sets.
 
-    `stations` needs station_type, lon, lat and rtw_alarms (from app_data/stations.parquet);
+    `stations` needs station_type, lon, lat and rtw_alarms (from public/app/data/stations.parquet);
     RTW sites are those with RTW alarms since 2025.
     """
     cent = planning_room_centroids()

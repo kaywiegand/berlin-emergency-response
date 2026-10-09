@@ -1,6 +1,10 @@
 # Makefile – berlin-emergency-response
 # Verwendung: make <target>   (Voraussetzung: uv)
 
+# dbt lives in dbt/; run all dbt commands from the repo root via these variables
+export DBT_PROJECT_DIR := dbt
+export DBT_PROFILES_DIR := dbt
+
 .PHONY: setup ingest ingest-full geo stations export notebooks test dbt-deps dbt-parse dbt-build app clean help
 
 setup: ## Umgebung + Dependencies installieren
@@ -19,7 +23,7 @@ geo: ## LOR-Polygone vom Geoportal laden und vereinfachen
 stations: ## Feuerwehr-Standorte und Einsatzbereiche vom Geoportal laden (Seed + GeoJSON)
 	uv run python scripts/fetch_stations.py
 
-export: ## Marts nach app_data/*.parquet exportieren
+export: ## Marts nach public/app/data/*.parquet exportieren
 	uv run python scripts/export_parquet.py
 
 notebooks: ## alle Notebooks ausführen (Outputs gespeichert)
@@ -38,10 +42,10 @@ dbt-build: ## Seeds, Modelle, Snapshots und Tests ausführen
 	uv run dbt build
 
 app: ## Streamlit-App starten
-	uv run streamlit run src/app.py
+	uv run streamlit run src/app/app.py
 
 clean: ## Build-Artefakte und Caches entfernen
-	rm -rf target logs .pytest_cache
+	rm -rf dbt/target dbt/logs .pytest_cache
 	find . -type d -name __pycache__ -not -path "./.venv/*" -exec rm -rf {} + 2>/dev/null || true
 
 help: ## Alle verfügbaren Targets anzeigen

@@ -111,3 +111,10 @@
 - Reproduktionscheck: Unsere Monatskurven treffen die BF-Diagramme (z. B. Hilfsfrist Rettungsdienst Januar 2018 und Juni 2025).
 - Abweichung: Technische Hilfe in unseren Daten 13 bis 15 Minuten, BF-Zahlenseite nennt 9,92 (BACKLOG 29).
 - Nächster Schritt: `02_preparation`, dann `03_analysis_*` (Zeit, Raum, Einsatzart, Sonderereignisse).
+
+### 2026-10-09 — Strukturumbau
+
+- Entscheidung (Kay): Engineering, Analysis und Science liegen im selben Repo und brauchen getrennte Ordner. `dbt/` ist ein selbstständiges Teilprojekt (die Abkürzung steht auch für das, was es ist); Notebooks bleiben flach nummeriert; App-Code unter `src/app/`, alle Daten der Live-App unter `public/app/data/` (das Dashboard ist wie ein Report ein Ergebnis und gehört zu `public/`).
+- Umzug mit `git mv` (Historie bleibt): `models/ macros/ seeds/ dbt_project.yml packages.yml package-lock.yml profiles.yml` nach `dbt/`, `tests/singular` nach `dbt/tests/singular`, `src/{app.py,views,utils}` nach `src/app/`, `app_data/` nach `public/app/data/`. dbt-Befehle laufen über `make` mit `DBT_PROJECT_DIR=dbt` und `DBT_PROFILES_DIR=dbt`.
+- Verifiziert: `make dbt-build` (88 grün, 1 erwartete Warnung), `pytest` 41 grün, Notebooks neu ausgeführt, Export schreibt nach `public/app/data/`.
+- Die Vorlagen `02_preparation` und `03_analysis` laufen nicht (Beispiel-Datei), sie werden als Nächstes geschrieben; `make notebooks` bricht bis dahin dort ab.

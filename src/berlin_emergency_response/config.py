@@ -19,8 +19,9 @@ PATHS = {
     "data":      _ROOT / "data",
     "raw":       _ROOT / "data" / "raw",
     "db":        _ROOT / "data" / "berlin_emergency.duckdb",
-    "dbt_models": _ROOT / "models",
-    "app_data":  _ROOT / "app_data",
+    "dbt":        _ROOT / "dbt",
+    "dbt_models": _ROOT / "dbt" / "models",
+    "app_data":  _ROOT / "public" / "app" / "data",
     "public":    _ROOT / "public",
     "figures":   _ROOT / "public" / "img",
 }

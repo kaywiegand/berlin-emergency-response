@@ -2,8 +2,8 @@
 
 Source:  Berliner Feuerwehr, BF-Open-Data, Datasets/Dispatchcodes/*.xlsx (CC BY 4.0), Stand in the file's Disclaimer sheet.
          The table covers ambulance service codes only (no fire, technical rescue, CBRN).
-Output:  seeds/seed_dispatch_codes.csv        one row per complaint category (2 digits) with its name
-         seeds/seed_dispatch_code_map.csv     one row per (category, level A-E/O): share of codes per emergency category RD1..RD5
+Output:  dbt/seeds/seed_dispatch_codes.csv        one row per complaint category (2 digits) with its name
+         dbt/seeds/seed_dispatch_code_map.csv     one row per (category, level A-E/O): share of codes per emergency category RD1..RD5
 
 A mission in Mission_Data carries only category and level (the first three of five code characters), so the emergency
 category of a single mission is not determined. The map gives, per (category, level), the share of table codes that fall
@@ -77,7 +77,7 @@ def main() -> None:
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--url", default=DEFAULT_URL)
     p.add_argument("--xlsx", default=str(BASE_DIR / "data" / "raw" / "dispatch_codes" / "codes.xlsx"))
-    p.add_argument("--seed-dir", default=str(BASE_DIR / "seeds"))
+    p.add_argument("--seed-dir", default=str(BASE_DIR / "dbt" / "seeds"))
     p.add_argument("--refresh", action="store_true")
     args = p.parse_args()
 

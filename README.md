@@ -66,8 +66,8 @@ Voraussetzung: [`uv`](https://docs.astral.sh/uv/).
 
 ```bash
 make setup        # uv sync + dbt deps
-make dbt-build    # Seeds, Modelle, Tests
-make export       # Marts nach app_data/ exportieren
+make dbt-build    # Seeds, Modelle, Tests (alle dbt-Befehle über make, sie setzen das Projektverzeichnis dbt/)
+make export       # Marts nach public/app/data/ exportieren
 make app          # Streamlit-Dashboard
 ```
 
@@ -79,20 +79,21 @@ make app          # Streamlit-Dashboard
 
 ```
 .
+├── dbt/             # Data Engineering: das vollständige dbt-Projekt (models, macros, seeds, tests, profiles.yml)
+├── scripts/         # Data Engineering: Ingestion, Abrufe (LOR, Wachen, Codes), Parquet-Export
+├── notebooks/       # Analysis und Science, nummeriert in Erzählreihenfolge
+├── src/
+│   ├── berlin_emergency_response/   # Python-Paket (Pfade, Hilfsfunktionen)
+│   └── app/                         # Code der Streamlit-App
+├── public/          # Web-Root (GitHub Pages) und Veröffentlichungen
+│   └── app/data/    #   alle Daten der Live-App (Parquet, GeoJSON, insights.json)
 ├── data/            # DuckDB-Datei und Rohdaten (nicht versioniert)
+├── tests/           # pytest für Python
 ├── docs/            # Plan, Konzept, Quellen, Datenwörterbuch
-├── models/          # dbt: staging, intermediate, marts
-├── macros/ seeds/ snapshots/ tests/   # dbt
-├── scripts/         # Ingestion, LOR-Polygone, Parquet-Export
-├── app_data/        # Export für die App (Parquet, GeoJSON)
-├── src/             # Streamlit-App (app.py, utils/) und Projektpaket berlin_emergency_response
-├── notebooks/       # Exploration und Analyse
-├── public/          # Web-Root für GitHub Pages
-├── dbt_project.yml · profiles.yml · packages.yml
-└── pyproject.toml · uv.lock
+└── Makefile · pyproject.toml · uv.lock
 ```
 
-`profiles.yml` ist versioniert: es enthält nur den lokalen DuckDB-Pfad, keine Zugangsdaten.
+`dbt/profiles.yml` ist versioniert: es enthält nur den lokalen DuckDB-Pfad, keine Zugangsdaten.
 
 ---
 

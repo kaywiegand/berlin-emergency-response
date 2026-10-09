@@ -19,10 +19,10 @@ Alle Spalten `VARCHAR`, dazu `_partition`, `_source_file`, `_loaded_at`. Partiti
 
 | Schicht | Modelle | Quelle der Beschreibung |
 | :--- | :--- | :--- |
-| Seeds | `seed_districts`, `seed_dispatch_codes`, `seed_events` | `seeds/schema.yml` |
-| Staging (view) | `stg_missions`, `stg_daily_missions`, `stg_regional_*` (3), `stg_turnout_times` | `models/staging/schema.yml` |
-| Intermediate (view) | `int_missions_enriched`, `int_regional_timegoal` | `models/intermediate/schema.yml` |
-| Marts | `dim_district`, `dim_region`, `fct_timegoal_region_yearly`, `fct_missions_daily_district` (incremental), `fct_missions_daily_citywide`, `fct_turnout_times_quarterly` | `models/marts/schema.yml` |
+| Seeds | `seed_districts`, `seed_dispatch_codes`, `seed_events` | `dbt/seeds/schema.yml` |
+| Staging (view) | `stg_missions`, `stg_daily_missions`, `stg_regional_*` (3), `stg_turnout_times` | `dbt/models/staging/schema.yml` |
+| Intermediate (view) | `int_missions_enriched`, `int_regional_timegoal` | `dbt/models/intermediate/schema.yml` |
+| Marts | `dim_district`, `dim_region`, `fct_timegoal_region_yearly`, `fct_missions_daily_district` (incremental), `fct_missions_daily_citywide`, `fct_turnout_times_quarterly` | `dbt/models/marts/schema.yml` |
 
 ## Kennzahlen
 
@@ -35,12 +35,12 @@ Alle Spalten `VARCHAR`, dazu `_partition`, `_source_file`, `_loaded_at`. Partiti
 
 | Datei | Inhalt |
 | :--- | :--- |
-| `app_data/timegoal_region_yearly.parquet` | offizielle Hilfsfrist-Zahlen je LOR-Region und Jahr (mit Bezirk) |
-| `app_data/missions_monthly.parquet` | Monat × Bezirk × Gruppe × Stufe, additive Zähler und Summe der Antwortzeit |
-| `app_data/missions_daily_citywide.parquet` | Stadt/Tag aus Daily_Data |
-| `app_data/turnout_quarterly.parquet` | Ausrückzeiten je Wache und Quartal |
-| `app_data/events.parquet`, `districts.parquet` | Seeds für Event-Marker und Bezirke |
-| `app_data/geo/lor_<ebene>.geojson` | vereinfachte LOR-Polygone (EPSG:4326), 3 Ebenen |
-| `app_data/geo/fire_operational_areas.geojson` | sechs Einsatzbereiche der Feuerwehr (Geoportal Berlin) |
-| `seeds/seed_stations.csv` | 102 Feuerwehr-Standorte mit Koordinaten, Typ, Bezirk, Einsatzbereich (Geoportal Berlin, Stand 2024) |
-| `app_data/meta.json` | Datenstand und Exportzeitpunkt |
+| `public/app/data/timegoal_region_yearly.parquet` | offizielle Hilfsfrist-Zahlen je LOR-Region und Jahr (mit Bezirk) |
+| `public/app/data/missions_monthly.parquet` | Monat × Bezirk × Gruppe × Stufe, additive Zähler und Summe der Antwortzeit |
+| `public/app/data/missions_daily_citywide.parquet` | Stadt/Tag aus Daily_Data |
+| `public/app/data/turnout_quarterly.parquet` | Ausrückzeiten je Wache und Quartal |
+| `public/app/data/events.parquet`, `districts.parquet` | Seeds für Event-Marker und Bezirke |
+| `public/app/data/geo/lor_<ebene>.geojson` | vereinfachte LOR-Polygone (EPSG:4326), 3 Ebenen |
+| `public/app/data/geo/fire_operational_areas.geojson` | sechs Einsatzbereiche der Feuerwehr (Geoportal Berlin) |
+| `dbt/seeds/seed_stations.csv` | 102 Feuerwehr-Standorte mit Koordinaten, Typ, Bezirk, Einsatzbereich (Geoportal Berlin, Stand 2024) |
+| `public/app/data/meta.json` | Datenstand und Exportzeitpunkt |

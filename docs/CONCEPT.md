@@ -33,12 +33,12 @@ Dieses Projekt ist als lerneffektives Praxis-Beispiel aufgebaut[cite: 1], das al
 
 | Prüfungsdomäne | Umsetzung im Projekt | Ordner / Datei |
 | :--- | :--- | :--- |
-| **1. Sources & Seeds** | Rohdaten-Definition, `source freshness` Warnschwellen & CSV-Seeds für Bezirkszuordnung | `models/staging/sources.yml`, `seeds/` |
-| **2. Materializations** | Staging (`view`), Marts (`table`), Inkrementelles Laden von Einsätzen (`incremental`) | `models/staging/`, `models/marts/` |
-| **3. Snapshots (SCD2)** | Historisierung von Fahrzeug-Kapazitäten & Wachen-Statusänderungen | `snapshots/` |
-| **4. Testing & Quality** | Schema-Tests (`unique`, `relationships`) & Custom Singular SQL Tests | `models/schema.yml`, `tests/` |
-| **5. Jinja & Macros** | Eigene UDF-Macros + Einbinden von `dbt-utils` | `macros/`, `packages.yml` |
-| **6. Documentation** | `doc()` Blocks, Lineage DAG & Exposures (Evidence Dashboard Link) | `models/exposures.yml`, `doc_blocks.md` |
+| **1. Sources & Seeds** | Rohdaten-Definition, `source freshness` Warnschwellen & CSV-Seeds für Bezirkszuordnung | `dbt/models/staging/sources.yml`, `dbt/seeds/` |
+| **2. Materializations** | Staging (`view`), Marts (`table`), Inkrementelles Laden von Einsätzen (`incremental`) | `dbt/models/staging/`, `dbt/models/marts/` |
+| **3. Snapshots (SCD2)** | Historisierung von Fahrzeug-Kapazitäten & Wachen-Statusänderungen | `dbt/snapshots/` |
+| **4. Testing & Quality** | Schema-Tests (`unique`, `relationships`) & Custom Singular SQL Tests | `dbt/models/*/schema.yml`, `dbt/tests/` |
+| **5. Jinja & Macros** | Eigene UDF-Macros + Einbinden von `dbt-utils` | `dbt/macros/`, `dbt/packages.yml` |
+| **6. Documentation** | `doc()` Blocks, Lineage DAG & Exposures (Evidence Dashboard Link) | `dbt/models/exposures.yml`, `doc_blocks.md` |
 | **7. Execution & CLI** | `dbt build`, State-Selection, Tagging & Selector-Syntax (`+model+`) | Terminal / CI Commands |
 
 ---
