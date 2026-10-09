@@ -68,7 +68,8 @@ Upstream hat keinen Tagesendpunkt: täglich wird die Datei des laufenden Jahres 
 ## Anreicherung
 
 - **Stufe 1 (S3b):** Feiertage/Ferien, Wetter (Open-Meteo, täglich, Berlin).
-- **Stufe 2 (später):** Einwohner je Planungsraum, Wachen-Koordinaten, Turnout-Vergleich, KV-/Call-Data.
+- **Erledigt (S3b):** Wachen-Standorte und Einsatzbereiche (Geoportal Berlin WFS `feuerwehr`, dl-de-zero-2.0) als `seed_stations` und GeoJSON.
+- **Stufe 2 (später):** Einwohner je Planungsraum, Turnout-Vergleich, KV-/Call-Data.
 - Politik nur als belegte Annotation (`seed_events`), keine Kausalaussage.
 
 ## Offene Verifikationen (im jeweiligen Schritt)

@@ -41,4 +41,6 @@ Alle Spalten `VARCHAR`, dazu `_partition`, `_source_file`, `_loaded_at`. Partiti
 | `app_data/turnout_quarterly.parquet` | Ausrückzeiten je Wache und Quartal |
 | `app_data/events.parquet`, `districts.parquet` | Seeds für Event-Marker und Bezirke |
 | `app_data/geo/lor_<ebene>.geojson` | vereinfachte LOR-Polygone (EPSG:4326), 3 Ebenen |
+| `app_data/geo/fire_operational_areas.geojson` | sechs Einsatzbereiche der Feuerwehr (Geoportal Berlin) |
+| `seeds/seed_stations.csv` | 102 Feuerwehr-Standorte mit Koordinaten, Typ, Bezirk, Einsatzbereich (Geoportal Berlin, Stand 2024) |
 | `app_data/meta.json` | Datenstand und Exportzeitpunkt |

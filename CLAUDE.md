@@ -64,5 +64,6 @@ make dbt-build  # dbt build
 make dbt-parse  # Syntaxcheck
 make export     # Marts -> app_data/*.parquet
 make geo        # LOR-Polygone (selten nötig)
+make stations   # Wachen-Standorte und Einsatzbereiche (selten nötig)
 make app        # Streamlit
 ```

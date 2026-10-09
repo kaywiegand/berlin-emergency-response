@@ -23,5 +23,5 @@ Prio: `1` = hoch · `2` = mittel · `3` = niedrig
 | 18 | `units_first_type`: Wert `RTW` mit Backtick (Tippfehler in der Quelle) in Staging oder Seed bereinigen (→ `02_preparation`) | 2 | S3b |
 | 19 | Regionaldatei 2025 ist etwas kleiner als Einzeleinsätze und Tagesreihe (anders als 2024/2026) — Ursache offen, ggf. bei BF nachfragen | 3 | S3b |
 | 20 | Kleine Regionen kennzeichnen (`is_reliable`, Schwelle als dbt-Var) in Mart und Karte | 2 | S3b |
-| 21 | `seed_stations` (Wachen-ID, aktueller Name, Typ) und Kennzeichen `is_partial` für angebrochene Quartale in `stg_turnout_times`/Mart | 2 | S3b |
-| 22 | Wachen-Koordinaten beschaffen (Quelle/Lizenz), um Wachen Bezirken zuzuordnen — Anreicherung Stufe 2 | 3 | S3b |
+| 21 | `is_partial` für angebrochene Quartale in `stg_turnout_times`/Mart; `dim_station` (LOR-Bezirk und Planungsraum per Punkt in Polygon, `has_rtw_turnout`) auf `seed_stations` | 2 | S3b |
+| 22 | `seed_stations` hat Stand 2024: zwei Wachen seit 2026 und eine 2023 aufgegebene fehlen; bei BF nach neuerer Fassung fragen oder belegen | 3 | S3b |

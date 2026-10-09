@@ -85,3 +85,10 @@
 - Kernbefund Raum: Quote und Antwortzeit hängen mit Abstand zum Zentrum und Einsatzdichte zusammen (Rangkorrelation rund 0,5). Wachen-Koordinaten fehlen noch (Anreicherung Stufe 2).
 - Kernbefund Daten: sieben Tage fehlen in der Tagesreihe (alle 2026) und erklären deren Abweichung zu den Einzeleinsätzen; die Regionaldatei 2025 ist etwas kleiner als die anderen Quellen; Prognoseräume sind 58 (Plan korrigiert).
 - Nächster Schritt: `02_preparation` (Pipeline im Detail, Entscheidungen aus den Fazits: Backtick, `is_reliable`, `seed_stations`, Geometrie-Merkmale, Lückentest).
+
+### 2026-10-09 — Feuerwehr-Standorte als neue Quelle
+
+- Anlass (Kay): Datensatz "Feuerwehr Standorte und Einsatzbereiche" auf daten.berlin.de war nicht berücksichtigt. Prüfung: WFS am Geoportal liefert 102 Standorte (Punkte) und 6 Einsatzbereiche, dl-de-zero-2.0; `wach_nr` passt zu `wache_nummer` aus `Turnout_Times` (77 von 80).
+- Neu: `scripts/fetch_stations.py` (`make stations`), `seeds/seed_stations.csv` mit Tests, `app_data/geo/fire_operational_areas.geojson`, `01_exploration_stations`, Zeile in `00_introduction`, `relationships`-Test von `stg_turnout_times` (`warn`).
+- Befund: Abstand zur nächsten Wache hängt stärker mit Quote und Antwortzeit zusammen als der Abstand zum Zentrum (abhängig von der Wachen-Menge; Details im Notebook). Annahme "Freiwillige Feuerwehr stellt keinen RTW" trägt nicht, FF-Standorte haben RTW-Alarmierungen.
+- Zeitpunkt: Der Datensatz hätte bei der Quellenprüfung in S0/S1 auffallen müssen (der Plan nannte Wachen-Koordinaten als offen).

@@ -83,4 +83,5 @@ Tests liegen deklarativ in den `schema.yml` der dbt-Schichten (`unique`, `not_nu
 ## Lizenz und Datenquelle
 
 Einsatzdaten: Berliner Feuerwehr, [BF-Open-Data](https://github.com/Berliner-Feuerwehr/BF-Open-Data), CC BY 4.0.
+Wachen-Standorte: Berliner Feuerwehr, Geoportal Berlin (dl-de-zero-2.0).
 Flächen: Amt für Statistik Berlin-Brandenburg / Statistische Einheiten im INSPIRE-Datenmodell (Lebensweltlich Orientierte Räume 01.01.2021), CC BY 3.0 DE.
