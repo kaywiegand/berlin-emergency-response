@@ -49,3 +49,10 @@
 - Entscheidung: zwei Kennzahlen nebeneinander (offiziell vs. eigene Näherung D/E, ≤ 600 s), Definitionsbruch 2024→2025 sichtbar (Event-Marker aus `seed_events`, Hinweis in der App).
 - Befund: LOR-Flächen decken alle 743 Regionen ab; Näherung sinkt 2018–2023 deutlich (BACKLOG 16).
 - Nächster Schritt: `/project-case check` als Zwischenprüfung, danach S4.
+
+### 2026-10-09 — Scaffold-Basis nachgezogen
+
+- `notebooks/00_introduction.ipynb`, `src/berlin_emergency_response/` (config, settings, notebook, utils, Unterpakete) und `public/index.html` (Platzhalter, wird in S6 generiert) aus `wgnd-scaffolding` übernommen. Entscheidung (Kay): DA/DS-Standard bleibt die Basis, dbt ist die Ergänzung; Notebooks dokumentieren, testen und explorieren.
+- Zusätzlich `02_preparation`, `03_analysis`, `04_insights` (Platzhalter mit Standard-Header). Die alten Notebooks `01_exploration`, `02_analysis`, `03_visualization` (Altstand, nicht mehr lauffähig) gelöscht (Kay-Freigabe).
+- Anpassung: Paket installierbar (`[tool.uv] package = true`), Docstrings auf Englisch, `PATHS` um `db`, `app_data`, `dbt_models` erweitert, ML-Konstanten entfernt.
+- `wgnd` v0.4.0 nach GitHub gepusht (Kay-Freigabe), `uv.lock` auf den Git-Stand aktualisiert; `uv sync` + 17 Tests grün mit der Git-Version (BACKLOG 13 erledigt).

@@ -63,7 +63,7 @@ make app          # Streamlit-Dashboard
 ├── macros/ seeds/ snapshots/ tests/   # dbt
 ├── scripts/         # Ingestion, LOR-Polygone, Parquet-Export
 ├── app_data/        # Export für die App (Parquet, GeoJSON)
-├── src/             # Streamlit-App, Plot- und Metrik-Module
+├── src/             # Streamlit-App (app.py, utils/) und Projektpaket berlin_emergency_response
 ├── notebooks/       # Exploration und Analyse
 ├── public/          # Web-Root für GitHub Pages
 ├── dbt_project.yml · profiles.yml · packages.yml

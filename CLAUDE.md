@@ -36,7 +36,8 @@ data/*.duckdb        ← Warehouse (ignoriert)
 models/              ← dbt: staging → intermediate → marts
 seeds/ macros/ snapshots/ tests/   ← dbt
 scripts/             ← Ingestion
-src/                 ← Streamlit-App (liest nur app_data/)
+src/app.py, src/utils/ ← Streamlit-App (liest nur app_data/)
+src/berlin_emergency_response/ ← Projektpaket für Notebooks (config, settings, notebook)
 app_data/            ← Parquet-Export + geo/ (versioniert, von der App gelesen)
 notebooks/           ← nach CONVENTIONS.md
 public/              ← Web-Root (Pages), Quelle public/md/slides.yaml
