@@ -13,6 +13,8 @@ dependencies = [
     "plotly>=7.1.0",
     "streamlit>=1.65.0",
     "wgnd",
+    "shapely>=2.2.0",
+    "pyarrow>=25.0.1",
 ]
 
 [tool.uv.sources]

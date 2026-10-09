@@ -1,89 +1,121 @@
+"""Plotly figures for the dashboard. Pure functions, themed via wgnd."""
+
+from __future__ import annotations
+
+import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
-import pandas as pd
+from wgnd.core.config import cfg
+from wgnd.plotly_theme import register, sequential_scale
 
-def plot_mission_trend(df: pd.DataFrame) -> go.Figure:
-    """Erstellt den Haupt-Trendplot: Tägliche Einsätze vs. 7-Tage-Durchschnitt."""
-    fig = px.line(
-        df, 
-        x='mission_date', 
-        y=['total_missions', 'total_missions_7d_avg'],
-        title='<b>Tägliche Notfalleinsätze & 7-Tage-Trend</b>',
-        labels={'value': 'Anzahl Einsätze', 'mission_date': 'Datum', 'variable': 'Metrik'},
-        color_discrete_map={'total_missions': '#94a3b8', 'total_missions_7d_avg': '#2563eb'}
+register()
+
+BERLIN_CENTER = {"lat": 52.51, "lon": 13.40}
+EVENT_COLORS = {"call_data": cfg.COLOR_NEUTRAL, "timegoal_definition": cfg.COLOR_SIGNAL}
+
+
+def pct(x: float, digits: int = 1) -> str:
+    return "n/a" if pd.isna(x) else f"{x * 100:.{digits}f} %".replace(".", ",")
+
+
+def num(x: float) -> str:
+    return f"{int(x):,}".replace(",", ".")
+
+
+def choropleth(df: pd.DataFrame, geojson: dict, value_range: tuple[float, float]) -> go.Figure:
+    """Official Hilfsfrist quote per LOR region."""
+    fig = px.choropleth_map(
+        df,
+        geojson=geojson,
+        locations="region_id",
+        featureidkey="properties.region_id",
+        color="ems_critical_timegoal_quote",
+        range_color=value_range,
+        color_continuous_scale=sequential_scale(),
+        hover_name="region_name",
+        hover_data={
+            "region_id": False,
+            "district_name": True,
+            "ems_critical_timegoal_quote": ":.1%",
+            "ems_critical_timegoal_computed": ":,",
+        },
+        labels={
+            "ems_critical_timegoal_quote": "Hilfsfrist-Quote",
+            "district_name": "Bezirk",
+            "ems_critical_timegoal_computed": "Einsätze (berechnet)",
+        },
+        map_style="carto-positron",
+        center=BERLIN_CENTER,
+        zoom=9.3,
+        opacity=0.8,
     )
-    
-    # Linien-Styling anpassen
-    fig.update_traces(selector=dict(name='total_missions'), line=dict(width=1, dash='dot'))
-    fig.update_traces(selector=dict(name='total_missions_7d_avg'), line=dict(width=2.5))
-    
     fig.update_layout(
-        template='plotly_white',
-        hovermode='x unified',
-        legend=dict(title='', orientation='h', yanchor='bottom', y=1.02, xanchor='right', x=1),
-        margin=dict(l=20, r=20, t=50, b=20)
+        margin=dict(l=0, r=0, t=0, b=0),
+        height=520,
+        coloraxis_colorbar=dict(title="Quote", tickformat=".0%"),
     )
     return fig
 
-def plot_mission_breakdown(df: pd.DataFrame) -> go.Figure:
-    """Erstellt den Stacked Area Chart für Rettungsdienst vs. Feuerwehr."""
-    fig = px.area(
-        df, 
-        x='mission_date', 
-        y=['rescue_missions', 'fire_missions'],
-        title='<b>Einsatzverteilung: Rettungsdienst vs. Feuerwehr</b>',
-        labels={'value': 'Anzahl Einsätze', 'mission_date': 'Datum', 'variable': 'Einsatzart'},
-        color_discrete_map={'rescue_missions': '#0284c7', 'fire_missions': '#dc2626'}
+
+def timeline(
+    city: pd.DataFrame,
+    districts: pd.DataFrame,
+    official: pd.DataFrame,
+    events: pd.DataFrame,
+    threshold_seconds: int,
+) -> go.Figure:
+    """Monthly share of missions within the threshold, official yearly quotes and event markers."""
+    fig = go.Figure()
+    for name, g in districts.groupby("district_name"):
+        fig.add_trace(
+            go.Scatter(x=g["mission_month"], y=g["share"], name=name, mode="lines", line=dict(width=1))
+        )
+    fig.add_trace(
+        go.Scatter(
+            x=city["mission_month"],
+            y=city["share"],
+            name="Berlin gesamt (eigene Näherung)",
+            mode="lines",
+            line=dict(width=3, color=cfg.PRIMARY_COLOR),
+        )
     )
-    
-    # Labels für Legende verschönern
-    fig.for_each_trace(lambda t: t.update(name="Rettungsdienst" if t.name=="rescue_missions" else "Feuerwehr"))
-    
+    if not official.empty:
+        fig.add_trace(
+            go.Scatter(
+                x=pd.to_datetime(official["data_year"].astype(str) + "-07-01"),
+                y=official["share"],
+                name="Offizielle Quote (Jahr)",
+                mode="markers",
+                marker=dict(size=11, symbol="diamond", color=cfg.COLOR_SIGNAL, line=dict(width=1, color="#222")),
+            )
+        )
+    for i, ev in enumerate(events.itertuples()):
+        color = EVENT_COLORS.get(ev.scope, cfg.COLOR_NEUTRAL)
+        fig.add_vline(x=pd.Timestamp(ev.event_start).timestamp() * 1000, line=dict(color=color, dash="dash", width=1.5))
+        fig.add_annotation(
+            x=pd.Timestamp(ev.event_start), y=1 - 0.08 * i, yref="paper", text=ev.short_label,
+            showarrow=False, xanchor="right", xshift=-4, font=dict(size=11, color=color),
+        )
     fig.update_layout(
-        template='plotly_white',
-        hovermode='x unified',
-        legend=dict(title='', orientation='h', yanchor='bottom', y=1.02, xanchor='right', x=1),
-        margin=dict(l=20, r=20, t=50, b=20)
+        height=460,
+        hovermode="x unified",
+        yaxis=dict(tickformat=".0%", title=f"Anteil Einsätze ≤ {threshold_seconds} s"),
+        xaxis=dict(range=[city["mission_month"].min(), city["mission_month"].max()]),
+        legend=dict(orientation="h", yanchor="bottom", y=1.02, x=0),
+        margin=dict(l=10, r=10, t=30, b=10),
     )
     return fig
 
-def plot_weekday_distribution(df: pd.DataFrame) -> go.Figure:
-    """Erstellt einen Boxplot für den Wochentagsvergleich (inkl. Wochenend-Highlight)."""
-    days_order = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-    
-    fig = px.box(
-        df, 
-        x='day_of_week', 
-        y='total_missions',
-        category_orders={'day_of_week': days_order},
-        title='<b>Einsatzverteilung nach Wochentagen</b>',
-        labels={'day_of_week': 'Wochentag', 'total_missions': 'Gesamteinsätze'},
-        color='is_weekend',
-        color_discrete_map={True: '#f59e0b', False: '#3b82f6'}
-    )
-    
-    fig.update_layout(
-        template='plotly_white',
-        showlegend=False,
-        margin=dict(l=20, r=20, t=50, b=20)
-    )
-    return fig
 
-def plot_response_time(df: pd.DataFrame) -> go.Figure:
-    """Erstellt den Trend der Median-Antwortzeit."""
-    fig = px.line(
-        df, 
-        x='mission_date', 
-        y='median_response_time_seconds',
-        title='<b>Entwicklung der Median-Antwortzeit (Sekunden)</b>',
-        labels={'median_response_time_seconds': 'Sekunden', 'mission_date': 'Datum'}
-    )
-    
-    fig.update_traces(line=dict(color='#0d9488', width=2))
-    
+def district_comparison(official: pd.DataFrame, proxy: pd.DataFrame) -> go.Figure:
+    d = official.merge(proxy, on="district_name", suffixes=("_official", "_proxy")).sort_values("share_official")
+    fig = go.Figure()
+    fig.add_bar(y=d["district_name"], x=d["share_official"], name="Offiziell (Hilfsfrist-Quote)", orientation="h",
+                marker_color=cfg.COLOR_SIGNAL)
+    fig.add_bar(y=d["district_name"], x=d["share_proxy"], name="Eigene Näherung", orientation="h",
+                marker_color=cfg.PRIMARY_COLOR)
     fig.update_layout(
-        template='plotly_white',
-        hovermode='x unified',
-        margin=dict(l=20, r=20, t=50, b=20)
+        barmode="group", height=460, xaxis=dict(tickformat=".0%", range=[0, 1]),
+        legend=dict(orientation="h", yanchor="bottom", y=1.02, x=0), margin=dict(l=10, r=10, t=30, b=10),
     )
     return fig
