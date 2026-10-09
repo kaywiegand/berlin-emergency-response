@@ -21,3 +21,4 @@ Prio: `1` = hoch · `2` = mittel · `3` = niedrig
 | 15 | Streamlit-Deployment (Community Cloud o. ä.) und Live-Link für `public/`-Hub — Redeploy-Test in S4, Link in S6 | 2 | S3 |
 | 16 | Zeitverlauf-Näherung sinkt 2018 bis 2023 deutlich; Ursache (Dispatch-Code-Zuordnung, Mix der Stufen) in `03_analysis_time` klären, bevor das als Befund gilt | 1 | S3 |
 | 17 | App: Seite "Befunde" aus `app_data/insights.json` (von `04_insights` erzeugt); App-Texte (Methodik, Hinweise) an die Notebook-Befunde angleichen | 1 | S3b |
+| 18 | `units_first_type`: Wert `RTW` mit Backtick (Tippfehler in der Quelle) in Staging oder Seed bereinigen (→ `02_preparation`) | 2 | S3b |

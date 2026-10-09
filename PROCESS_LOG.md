@@ -71,3 +71,9 @@
 - Befund: Die DuckDB enthielt noch Objekte der in S2 entfernten Modelle (`fct_missions_daily`, `int_missions_daily_enhanced`, `stg_missions_daily`); dbt löscht entfernte Modelle nicht. Manuell gelöscht.
 - Offen: Bedeutung der `mission_count_rd1`–`rd5` und `KV_Data` nicht geprüft, deshalb nicht erklärt.
 - Nächster Schritt: `01_exploration_missions` (mit `wgnd.inspect`), dann die weiteren Quellen.
+
+### 2026-10-09 — 01_exploration_missions
+
+- Notebook mit Struktur, Missing, Duplikaten, Kategorien, Antwortzeit, Zeit und Fazit (Inhalt, Nutzen, Grenzen, Beobachtungen, offene Fragen). Profil-Funktionen laufen auf fester Stichprobe (Seed 42), Anteile per SQL auf der Gesamtmenge.
+- Befund (Details im Notebook): Antwortzeit fehlt systematisch (nach Einsatztyp und Stufe), die Dispatch-Stufe ist über die Jahre nicht stabil (Codeabdeckung, Stufenmix) — stützt die Vermutung hinter BACKLOG 16. Tippfehler `RTW` mit Backtick in `units_first_type`.
+- Nächster Schritt: `01_exploration_daily` (inklusive Bedeutung von `mission_count_rd1`–`rd5`).
