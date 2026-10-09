@@ -65,11 +65,20 @@ Upstream hat keinen Tagesendpunkt: täglich wird die Datei des laufenden Jahres 
 - Version: `fct_timegoal_region_yearly` v1 → v2 (z. B. zusätzliche Spalte), `latest_version` und Deprecation dokumentiert.
 - Qualitätsbericht (Markdown, aus `run_results.json` erzeugt): Tests je Schicht, Datenlücken (Telefonie-Ausfall 2024/25, leere `response_time`, Korrekturen in Vorjahren).
 
-## Anreicherung
+## Anreicherung und weitere Daten (Phase 2)
 
-- **Stufe 1 (S3b):** Feiertage/Ferien, Wetter (Open-Meteo, täglich, Berlin).
-- **Erledigt (S3b):** Wachen-Standorte und Einsatzbereiche (Geoportal Berlin WFS `feuerwehr`, dl-de-zero-2.0) als `seed_stations` und GeoJSON.
-- **Stufe 2 (später):** Einwohner je Planungsraum, Turnout-Vergleich, KV-/Call-Data.
+Quellen laut Kay (2026-10-09), Verwendung wörtlich übernommen:
+
+| Datenquelle | Verwendung | Stand |
+| :--- | :--- | :--- |
+| Mission Data auf GitHub | Einsatzzeiten, Einsatzarten und Prozesszeiten prüfen | in Gebrauch |
+| Kiez Data und regionale Kennzahlen | Räumliche Unterschiede untersuchen | offen; konkreten Datensatz klären (Kay) |
+| Feuerwehrstandorte | Entfernung oder Erreichbarkeit von Wachen näherungsweise analysieren | erledigt als `seed_stations` (Stand 2024), Analyse in `03_analysis_geo` |
+| DWD Open Data | Wetterdaten ergänzen | offen, Stufe 1 (ersetzt die frühere Annahme Open-Meteo) |
+| Berlin Open Data | Bevölkerungs-, Stadtstruktur- und weitere Geodaten suchen | offen, Stufe 2 |
+
+- **Stufe 1 (S3b):** Feiertage/Ferien, Wetter (DWD).
+- **Stufe 2 (später):** Einwohner je Planungsraum und weitere Strukturdaten (Kiez Data, Berlin Open Data), Turnout-Vergleich, KV-/Call-Data.
 - Politik nur als belegte Annotation (`seed_events`), keine Kausalaussage.
 
 ## Offene Verifikationen (im jeweiligen Schritt)

@@ -92,3 +92,11 @@
 - Neu: `scripts/fetch_stations.py` (`make stations`), `seeds/seed_stations.csv` mit Tests, `app_data/geo/fire_operational_areas.geojson`, `01_exploration_stations`, Zeile in `00_introduction`, `relationships`-Test von `stg_turnout_times` (`warn`).
 - Befund: Abstand zur nächsten Wache hängt stärker mit Quote und Antwortzeit zusammen als der Abstand zum Zentrum (abhängig von der Wachen-Menge; Details im Notebook). Annahme "Freiwillige Feuerwehr stellt keinen RTW" trägt nicht, FF-Standorte haben RTW-Alarmierungen.
 - Zeitpunkt: Der Datensatz hätte bei der Quellenprüfung in S0/S1 auffallen müssen (der Plan nannte Wachen-Koordinaten als offen).
+
+### 2026-10-09 — Rückmeldungen Kay: Einsatzarten, BF-Diagramme, Einsatzcodes
+
+- Fragen: Gelten für Rettungsdienst, Brand, technische Hilfe dieselben Regeln? Differenzieren die EDA-Notebooks genug? BF-Diagramme sollen ins Ergebnis. Werden die Einsatzcodes berücksichtigt? Phase-2-Quellen vermerkt (`docs/PLAN.md`).
+- Befund: Die BF-Seite dokumentiert den Stichtag der Notfallkategorien (25.03.2025); in unserer Tagesreihe springt der Anteil "kritisch" an exakt diesem Tag von rund 96 % auf rund 69 % (danach rund 60 %). `seed_events` entsprechend korrigiert (verifiziert).
+- Befund: RD1+RD2 bleibt in der Tagesreihe über den Stichtag hinweg bei rund der Hälfte der RD-Einsätze und ist damit die vergleichbare Grundgesamtheit; die Annahme "Stufe D/E als kritisch" ist zu eng (C/D/E liegt volumenmäßig näher). Notebooks `01_exploration_daily`/`_regional`/`_missions` und die App-Texte sind nach der Feedback-Runde anzupassen.
+- Befund: Einsatzcodes-Tabelle der BF (AMPDS, Stand 21.05.2026) ist noch nicht eingebunden; `seed_dispatch_codes` stammt aus Mission_Data (BACKLOG 26).
+- Offen aus dem Dialog: dbt-Schwelle 600 s gilt für alle Einsatzgruppen (BACKLOG 25).
