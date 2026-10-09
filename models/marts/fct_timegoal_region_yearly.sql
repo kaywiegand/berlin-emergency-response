@@ -16,5 +16,9 @@ select
     fire_timegoal_quote,
     response_time_ems_critical_mean,
     response_time_ems_critical_median,
+    response_time_ems_critical_cpr_median,
+    response_time_fire_time_to_first_pump_median,
+    response_time_fire_time_to_full_crew_median,
+    response_time_technical_rescue_median,
     loaded_at
 from {{ ref('int_regional_timegoal') }}

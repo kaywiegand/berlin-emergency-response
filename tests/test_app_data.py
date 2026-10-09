@@ -37,7 +37,9 @@ def test_regional_quotes_are_probabilities():
 
 def test_monthly_export_is_consistent():
     m = _table("missions_monthly")
-    assert (m["mission_count_within_timegoal"] <= m["mission_count_with_response_time"]).all()
+    assert (m["mission_count_within_timegoal"] <= m["mission_count_with_timegoal"]).all()
+    assert (m["mission_count_with_timegoal"] <= m["mission_count_with_response_time"]).all()
+    assert (m.loc[m["mission_group"] != "ems", "mission_count_with_timegoal"] == 0).all()
     assert (m["mission_count_with_response_time"] <= m["mission_count"]).all()
     assert not m.duplicated(["mission_month", "district_code", "mission_group", "criticality_tier"]).any()
 
@@ -58,12 +60,34 @@ def test_official_kpis_citywide_year():
     assert k["computed"] > 0
 
 
-@pytest.mark.parametrize("level_label", ["Bezirksregion (143)", "Planungsraum (542)", "Prognoseraum (58)"])
-def test_app_renders_for_every_map_level(level_label):
+VIEWS = ["overview", "counts", "arrival_times", "stations", "notes"]
+
+
+@pytest.mark.parametrize("view", VIEWS)
+def test_every_page_renders(view):
     from streamlit.testing.v1 import AppTest
 
-    at = AppTest.from_file(str(ROOT / "src" / "app.py"), default_timeout=60).run()
-    assert not at.exception
-    at.radio[0].set_value(level_label).run()
-    assert not at.exception
-    assert len(at.metric) == 4
+    at = AppTest.from_file(str(ROOT / "src" / "views" / f"{view}.py"), default_timeout=90).run()
+    assert not at.exception, [e.value for e in at.exception]
+
+
+@pytest.mark.parametrize("level_label", ["Bezirksregion (143)", "Planungsraum (542)", "Prognoseraum (58)"])
+@pytest.mark.parametrize("metric", list(__import__("importlib").import_module("utils.metrics").REGION_METRICS))
+def test_overview_renders_for_every_level_and_metric(level_label, metric):
+    from streamlit.testing.v1 import AppTest
+
+    at = AppTest.from_file(str(ROOT / "src" / "views" / "overview.py"), default_timeout=90).run()
+    at.radio[0].set_value(level_label)
+    at.selectbox[0].set_value(metric).run()
+    assert not at.exception, [e.value for e in at.exception]
+
+
+def test_time_goal_threshold_comes_from_dbt():
+    meta = json.loads((APP_DATA / "meta.json").read_text(encoding="utf-8"))
+    assert meta["timegoal_seconds"] == {"ems": 600}
+
+
+def test_events_are_sourced():
+    events = _table("events")
+    assert events["source"].notna().all() and events["short_label"].notna().all()
+    assert {"weather", "organisation", "timegoal_definition"} <= set(events["scope"])

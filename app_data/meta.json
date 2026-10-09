@@ -1,4 +1,8 @@
 {
   "data_through": "2026-10-07",
-  "exported_at": "2026-10-09T14:35:05+00:00"
+  "daily_through": "2026-10-07",
+  "timegoal_seconds": {
+    "ems": 600
+  },
+  "exported_at": "2026-10-09T14:52:22+00:00"
 }
